@@ -1,7 +1,7 @@
 local terminal = {}
 local p = require("vagari.palette")
 
--- traditional terminal colors
+--                    traditional terminal colors
 -- /-------------------------------------------------------------\
 -- | black   red     green    blue     magenta  cyan     white   | color
 -- | color0  color1  color2   color4   color5   color6   color7  | normal

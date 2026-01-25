@@ -21,6 +21,7 @@ thalamus = {
 		disown = { fg = p.blu_0, bg = p.drk_1 },
 		norm = { fg = p.glc_4, bg = p.drk_0 },
 		fg = { fg = p.glc_4 },
+		bfg = { fg = p.drk_1 },
 		bg = { bg = p.drk_0 },
 	},
 

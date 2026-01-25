@@ -72,6 +72,7 @@ hl.builtin = {
 	CursorLineNr = t.idle.passive,
 	LineNrBelow = t.passive.comment,
 	ColorColumn = t.passive.bg,
+	VirtColumn = t.passive.bfg,
 	CursorColumn = t.passive.bg,
 	CursorLine = t.passive.bg,
 
@@ -124,6 +125,11 @@ hl.builtin = {
 	TabLineSel = t.idle.passive_br,
 	WinBar = t.idle.passive,
 	WinBarNC = t.passive.norm,
+
+	-- floating windows:
+	FloatBorder = t.idle.passive,
+	FloatTitle = t.idle.bold,
+	FloatFooter = t.passive.fg,
 
 	-- uncertain assignments:
 	Directory = t.h1,
@@ -382,6 +388,61 @@ hl.plugins.telescope = {
 	TelescopePromptPrefix = t.active.norm,
 	TelescopeSelection = t.active.select,
 	TelescopeSelectionCaret = t.active.select,
+}
+
+hl.plugins.notify = {
+	NotifyERRORBorder = t.msg.error.virtual,
+	NotifyERRORIcon = t.msg.error.norm,
+	NotifyERRORTitle = t.msg.error.norm,
+	NotifyWARNBorder = t.msg.warn.virtual,
+	NotifyWARNIcon = t.msg.warn.norm,
+	NotifyWARNTitle = t.msg.warn.norm,
+	NotifyINFOBorder = t.msg.info.virtual,
+	NotifyINFOIcon = t.msg.info.norm,
+	NotifyINFOTitle = t.msg.info.norm,
+	NotifyDEBUGBorder = t.passive.fg,
+	NotifyDEBUGIcon = t.passive.fg,
+	NotifyDEBUGTitle = t.passive.fg,
+	NotifyTRACEBorder = t.msg.hint.virtual,
+	NotifyTRACEIcon = t.msg.hint.norm,
+	NotifyTRACETitle = t.msg.hint.norm,
+}
+
+hl.plugins.noice = {
+	NoiceCmdline = t.passive.fg,
+	NoiceCmdlineIcon = t.msg.info.norm,
+	NoiceCmdlineIconSearch = t.msg.warn.norm,
+	NoiceCmdlinePopup = t.idle.passive_br,
+	NoiceCmdlinePopupBorder = t.msg.info.norm,
+	NoiceCmdlinePopupBorderSearch = t.msg.warn.norm,
+	NoiceCmdlinePopupTitle = t.msg.info.norm,
+	NoiceCmdlinePrompt = t.txt.title,
+	NoiceConfirm = t.idle.passive_br,
+	NoiceConfirmBorder = t.msg.info.norm,
+	NoiceCursor = t.txt.reverse,
+	NoiceFormatConfirm = t.passive.bg,
+	NoiceFormatConfirmDefault = t.active.visual,
+	NoiceFormatLevelDebug = t.passive.fg,
+	NoiceFormatLevelError = t.msg.error.virtual,
+	NoiceFormatLevelInfo = t.msg.info.virtual,
+	NoiceFormatLevelWarn = t.msg.warn.virtual,
+	NoiceFormatProgressDone = t.idle.search,
+	NoiceFormatProgressTodo = t.passive.bg,
+	NoiceLspProgressClient = t.txt.title,
+	NoiceLspProgressSpinner = t.const.norm,
+	NoiceLspProgressTitle = t.passive.fg,
+	NoiceMini = t.passive.fg,
+	NoicePopup = t.idle.passive_br,
+	NoicePopupBorder = t.idle.passive,
+	NoicePopupmenu = t.idle.passive_br,
+	NoicePopupmenuBorder = t.idle.passive,
+	NoicePopupmenuMatch = t.special,
+	NoicePopupmenuSelected = t.active.select,
+	NoiceScrollbar = t.idle.bg,
+	NoiceScrollbarThumb = t.idle.solid,
+	NoiceSplit = t.idle.passive_br,
+	NoiceSplitBorder = t.idle.passive,
+	NoiceVirtualText = t.msg.info.virtual,
 }
 
 -- }}}
