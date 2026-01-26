@@ -46,7 +46,7 @@ end
 
 function highlights.setup()
 	-- Ensure thalamus loaded correctly
-	if not t or not t.txt or not t.txt.norm then
+	if not t or not t.txt or not t.txt.txt then
 		vim.notify("vagari: thalamus failed to load", vim.log.levels.ERROR)
 		return
 	end
@@ -55,8 +55,8 @@ function highlights.setup()
 	-- ========================================================================
 
 	-- Editor UI
-	hl("Normal", t.txt.norm)
-	hl("NormalNC", t.passive.norm)
+	hl("Normal", t.txt.txt)
+	hl("NormalNC", t.passive.passive)
 	hl("NormalFloat", t.idle.passive_br)
 	hl("FloatBorder", t.idle.passive)
 	hl("FloatTitle", t.idle.bold)
@@ -66,7 +66,7 @@ function highlights.setup()
 	hl("CursorIM", t.txt.reverse)
 	hl("TermCursor", t.txt.reverse)
 	hl("TermCursorNC", t.txt.reverse)
-	hl("MatchParen", t.active.norm)
+	hl("MatchParen", t.active.active)
 	hl("EndOfBuffer", t.passive.invis)
 	hl("Whitespace", t.passive.comment)
 
@@ -80,18 +80,18 @@ function highlights.setup()
 	hl("ColorColumn", t.passive.bg)
 	hl("VirtColumn", t.passive.bfg)
 	hl("SignColumn", t.passive.comment)
-	hl("CursorLineSign", t.passive.norm)
-	hl("Folded", t.passive.norm)
-	hl("FoldColumn", t.passive.norm)
+	hl("CursorLineSign", t.passive.passive)
+	hl("Folded", t.passive.passive)
+	hl("FoldColumn", t.passive.passive)
 	hl("CursorLineFold", t.idle.passive)
 
 	-- Windows & tabs
 	hl("WinSeparator", t.idle.passive)
 	hl("WinBar", t.idle.passive)
-	hl("WinBarNC", t.passive.norm)
-	hl("StatusLine", t.passive.norm)
-	hl("StatusLineNC", t.passive.norm)
-	hl("TabLine", t.passive.norm)
+	hl("WinBarNC", t.passive.passive)
+	hl("StatusLine", t.passive.passive)
+	hl("StatusLineNC", t.passive.passive)
+	hl("TabLine", t.passive.passive)
 	hl("TabLineFill", t.passive.bg)
 	hl("TabLineSel", t.idle.passive_br)
 
@@ -124,18 +124,18 @@ function highlights.setup()
 	hl("SpellRare", t.msg.info.rare)
 
 	-- Messages
-	hl("ErrorMsg", t.msg.error.norm)
-	hl("WarningMsg", t.msg.warn.norm)
+	hl("ErrorMsg", t.msg.error.error)
+	hl("WarningMsg", t.msg.warn.warn)
 	hl("ModeMsg", t.idle.passive_br)
 	hl("MsgArea", t.passive.fg)
-	hl("MoreMsg", t.idle.norm)
-	hl("MsgSeparator", t.idle.norm)
-	hl("Question", t.idle.norm)
+	hl("MoreMsg", t.idle.idle)
+	hl("MsgSeparator", t.idle.idle)
+	hl("Question", t.idle.idle)
 
 	-- Misc UI
-	hl("Directory", t.h1)
-	hl("Title", t.h1)
-	hl("Conceal", t.idle.norm)
+	hl("Directory", t.misc.h1)
+	hl("Title", t.misc.h1)
+	hl("Conceal", t.idle.idle)
 	hl("NonText", t.passive.fg)
 	hl("SpecialKey", t.txt.inactive)
 	hl("QuickFixLine", t.idle.passive_br)
@@ -144,39 +144,65 @@ function highlights.setup()
 	-- SYNTAX: Standard Vim groups (treesitter auto-links to these)
 	-- ========================================================================
 
+	-- Comments
 	hl("Comment", t.passive.comment)
-	hl("Constant", t.const.norm)
-	hl("String", t.str.norm)
-	hl("Character", t.str.char)
-	hl("Number", t.num)
-	hl("Boolean", t.bool)
-	hl("Float", t.float)
-	hl("Identifier", t.var.norm)
-	hl("Function", t.func.norm)
-	hl("Statement", t.keyword.norm)
-	hl("Conditional", t.keyword.logic)
-	hl("Repeat", t.keyword.logic)
-	hl("Label", t.keyword.label)
-	hl("Operator", t.operator)
-	hl("Keyword", t.keyword.norm)
-	hl("Exception", t.keyword.label)
-	hl("PreProc", t.keyword.external)
-	hl("Include", t.keyword.external)
-	hl("Define", t.keyword.externaldef)
-	hl("PreCondit", t.keyword.external)
-	hl("Macro", t.func.macro)
-	hl("Type", t.type.norm)
-	hl("StorageClass", t.type.store)
-	hl("Structure", t.type.struct)
-	hl("Typedef", t.type.def)
-	hl("Special", t.special)
-	hl("SpecialChar", t.specialchar)
-	hl("Tag", t.var.tag)
-	hl("Delimiter", t.delim.norm)
+
+	-- Strings
+	hl("String", t.strings.str)
+	hl("Character", t.strings.char)
+
+	-- Primitives
+	hl("Number", t.primitives.num)
+	hl("Boolean", t.primitives.bool)
+	hl("Float", t.primitives.float)
+
+	-- Constants
+	hl("Constant", t.consts.const)
+
+	-- Variables
+	hl("Identifier", t.types.var)
+	hl("Tag", t.types.tag)
+
+	-- Functions
+	hl("Function", t.functions.func)
+
+	-- Keywords
+	hl("Statement", t.keywords.keyword)
+	hl("Conditional", t.keywords.logic)
+	hl("Repeat", t.keywords.logic)
+	hl("Label", t.keywords.label)
+	hl("Keyword", t.keywords.keyword)
+	hl("Exception", t.keywords.label)
+
+	-- Operators
+	hl("Operator", t.delimiters.operator)
+
+	-- Preprocessor / External
+	hl("PreProc", t.keywords.external)
+	hl("Include", t.keywords.external)
+	hl("Define", t.keywords.externaldef)
+	hl("PreCondit", t.keywords.external)
+	hl("Macro", t.functions.macro)
+
+	-- Types
+	hl("Type", t.types.type)
+	hl("StorageClass", t.types.store)
+	hl("Structure", t.types.struct)
+	hl("Typedef", t.types.def)
+
+	-- Delimiters & Special
+	hl("Special", t.misc.special)
+	hl("SpecialChar", t.misc.specialchar)
+	hl("Delimiter", t.delimiters.delim)
+
+	-- Apply all LSP highlights from thalamus
+	for group, def in pairs(t.lsp) do
+		hl(group, def)
+	end
 	hl("SpecialComment", t.msg.hint.special)
 	hl("Debug", t.msg.hint.special)
 	hl("Ignore", t.passive.fg)
-	hl("Error", t.msg.error.norm)
+	hl("Error", t.msg.error.error)
 	hl("Todo", t.msg.hint.special)
 	hl("Bold", t.txt.bold)
 	hl("Italic", t.txt.italic)
@@ -195,26 +221,26 @@ function highlights.setup()
 	-- Treesitter and LSP link to these
 	-- ========================================================================
 
-	hl("TypeBuiltin", t.type.builtin) -- int, bool, string
-	hl("TypeDefinition", t.type.def) -- typedef, type alias
-	hl("FunctionBuiltin", t.func.builtin) -- print, len, make
-	hl("FunctionMacro", t.func.macro) -- macros, decorators
-	hl("FunctionNamespace", t.func.namespace) -- modules, packages
-	hl("VariableBuiltin", t.var.builtin) -- self, this, cls
-	hl("VariableParameter", t.var.param) -- function params
-	hl("VariableAttribute", t.var.attr) -- attributes
-	hl("ConstantBuiltin", t.const.builtin) -- nil, true, false
-	hl("ConstantExternal", t.const.external) -- preprocessor constants
-	hl("KeywordFlow", t.keyword.flow) -- return, break
-	hl("KeywordLogic", t.keyword.logic) -- if, for, while
-	hl("KeywordDef", t.keyword.def) -- func, def, class
-	hl("KeywordExternal", t.keyword.external) -- import, include
-	hl("KeywordException", t.keyword.exception) -- throw, catch
-	hl("StringDoc", t.str.doc) -- docstrings
-	hl("StringRegex", t.str.regex) -- regex
-	hl("StringSpecial", t.str.special) -- special strings
-	hl("DelimiterBracket", t.delim.bracket) -- (), {}, []
-	hl("Link", t.link) -- URLs
+	hl("TypeBuiltin", t.types.builtin) -- int, bool, string
+	hl("TypeDefinition", t.types.def) -- typedef, type alias
+	hl("FunctionBuiltin", t.functions.builtin) -- print, len, make
+	hl("FunctionMacro", t.functions.macro) -- macros, decorators
+	hl("FunctionNamespace", t.functions.namespace) -- modules, packages
+	hl("VariableBuiltin", t.types.varBuiltin) -- self, this, cls
+	hl("VariableParameter", t.types.varParam) -- function params
+	hl("VariableAttribute", t.types.attr) -- attributes
+	hl("ConstantBuiltin", t.consts.builtin) -- nil, true, false
+	hl("ConstantExternal", t.consts.external) -- preprocessor constants
+	hl("KeywordFlow", t.keywords.flow) -- return, break
+	hl("KeywordLogic", t.keywords.logic) -- if, for, while
+	hl("KeywordDef", t.keywords.def) -- func, def, class
+	hl("KeywordExternal", t.keywords.external) -- import, include
+	hl("KeywordException", t.keywords.exception) -- throw, catch
+	hl("StringDoc", t.strings.doc) -- docstrings
+	hl("StringRegex", t.strings.regex) -- regex
+	hl("StringSpecial", t.strings.special) -- special strings
+	hl("DelimiterBracket", t.delimiters.bracket) -- (), {}, []
+	hl("Link", t.misc.link) -- URLs
 
 	-- ========================================================================
 	-- TREESITTER: Explicit overrides only (auto-linking handles most)
@@ -222,10 +248,9 @@ function highlights.setup()
 	-- groups that need custom base groups or specific overrides
 	-- ========================================================================
 
-	-- Core treesitter groups (explicit to ensure they're always set)
-	-- These should auto-link, but being explicit prevents any race conditions
+	-- Core treesitter groups
 	link("@variable", "Identifier")
-	link("@variable.member", "Identifier")
+	hl("@variable.member", t.types.member)
 	link("@function", "Function")
 	link("@function.call", "Function")
 	link("@function.method", "Function")
@@ -241,14 +266,14 @@ function highlights.setup()
 	link("@constant", "Constant")
 
 	-- Comments (override for documentation)
-	hl("@comment.documentation", t.str.doc)
+	hl("@comment.documentation", t.strings.doc)
 	link("@comment.error", "ErrorMsg")
 	link("@comment.warning", "WarningMsg")
 	hl("@comment.todo", t.msg.hint.special)
-	hl("@comment.note", t.msg.info.norm)
+	hl("@comment.note", t.msg.info.info)
 
 	-- Punctuation
-	hl("@punctuation.delimiter", t.delim.norm)
+	hl("@punctuation.delimiter", t.delimiters.delim)
 	link("@punctuation.bracket", "DelimiterBracket")
 	link("@punctuation.special", "Special")
 
@@ -322,7 +347,7 @@ function highlights.setup()
 	link("@markup.raw", "String")
 	link("@markup.raw.block", "String")
 	link("@markup.list", "Delimiter")
-	hl("@markup.list.checked", t.msg.success.norm)
+	hl("@markup.list.checked", t.msg.success.success)
 	link("@markup.list.unchecked", "Comment")
 
 	-- Diff
@@ -342,73 +367,13 @@ function highlights.setup()
 	link("@label.help", "Tag")
 
 	-- ========================================================================
-	-- LSP SEMANTIC TOKENS: Pure links (no direct colors)
-	-- Links to same base groups as treesitter for consistency
-	-- ========================================================================
-
-	-- Basic types -> Vim syntax
-	link("@lsp.type.class", "Type")
-	link("@lsp.type.comment", "Comment")
-	link("@lsp.type.decorator", "KeywordExternal")
-	link("@lsp.type.enum", "Type")
-	link("@lsp.type.enumMember", "ConstantBuiltin")
-	link("@lsp.type.event", "Tag")
-	link("@lsp.type.function", "Function")
-	link("@lsp.type.interface", "Type")
-	link("@lsp.type.keyword", "Keyword")
-	link("@lsp.type.macro", "FunctionMacro")
-	link("@lsp.type.method", "Function")
-	link("@lsp.type.modifier", "StorageClass")
-	link("@lsp.type.namespace", "FunctionNamespace")
-	link("@lsp.type.number", "Number")
-	link("@lsp.type.operator", "Operator")
-	link("@lsp.type.parameter", "VariableParameter")
-	link("@lsp.type.property", "Identifier")
-	link("@lsp.type.regexp", "StringRegex")
-	link("@lsp.type.string", "String")
-	link("@lsp.type.struct", "Structure")
-	link("@lsp.type.type", "Type")
-	link("@lsp.type.typeParameter", "Type")
-	link("@lsp.type.variable", "Identifier")
-
-	-- Modifiers: only define the useful ones, leave others undefined
-	-- Undefined @lsp.mod.* groups have no effect (type determines color)
-	link("@lsp.mod.deprecated", "DiagnosticDeprecated")
-	-- readonly/static are intentionally not defined to avoid conflicts
-
-	-- Combined type+modifier -> custom base groups
-	-- NOTE: For types, we link to Type (not TypeBuiltin) to match treesitter
-	-- and avoid flash when LSP loads. Treesitter doesn't distinguish builtin types.
-	link("@lsp.typemod.class.defaultLibrary", "Type")
-	link("@lsp.typemod.enum.defaultLibrary", "Type")
-	link("@lsp.typemod.enumMember.defaultLibrary", "ConstantBuiltin")
-	link("@lsp.typemod.function.defaultLibrary", "FunctionBuiltin")
-	link("@lsp.typemod.method.defaultLibrary", "FunctionBuiltin")
-	link("@lsp.typemod.struct.defaultLibrary", "Type")
-	link("@lsp.typemod.type.defaultLibrary", "Type")
-	link("@lsp.typemod.type.string", "Type") -- gopls custom
-	link("@lsp.typemod.typeAlias.defaultLibrary", "TypeBuiltin")
-	link("@lsp.typemod.variable.defaultLibrary", "VariableBuiltin")
-	link("@lsp.typemod.variable.readonly", "Constant")
-	link("@lsp.typemod.operator.injected", "Operator")
-	link("@lsp.typemod.string.injected", "String")
-	link("@lsp.typemod.variable.injected", "Identifier")
-
-	-- Deprecated highlight
-	vim.api.nvim_set_hl(
-		0,
-		"DiagnosticDeprecated",
-		{ strikethrough = true, sp = t.msg.warn.norm.fg }
-	)
-
-	-- ========================================================================
 	-- DIAGNOSTICS
 	-- ========================================================================
 
-	hl("DiagnosticError", t.msg.error.norm)
-	hl("DiagnosticHint", t.msg.hint.norm)
-	hl("DiagnosticInfo", t.msg.info.norm)
-	hl("DiagnosticWarn", t.msg.warn.norm)
+	hl("DiagnosticError", t.msg.error.error)
+	hl("DiagnosticHint", t.msg.hint.hint)
+	hl("DiagnosticInfo", t.msg.info.info)
+	hl("DiagnosticWarn", t.msg.warn.warn)
 
 	hl("DiagnosticVirtualTextError", t.msg.error.virtual)
 	hl("DiagnosticVirtualTextWarn", t.msg.warn.virtual)
@@ -458,38 +423,38 @@ function highlights.setup()
 	hl("TelescopePromptBorder", t.active.input)
 	hl("TelescopePromptTitle", t.active.input)
 	hl("TelescopeMatching", t.active.search)
-	hl("TelescopePromptPrefix", t.active.norm)
+	hl("TelescopePromptPrefix", t.active.active)
 	hl("TelescopeSelection", t.active.select)
 	hl("TelescopeSelectionCaret", t.active.select)
 
 	-- Notify
 	hl("NotifyERRORBorder", t.msg.error.virtual)
-	hl("NotifyERRORIcon", t.msg.error.norm)
-	hl("NotifyERRORTitle", t.msg.error.norm)
+	hl("NotifyERRORIcon", t.msg.error.error)
+	hl("NotifyERRORTitle", t.msg.error.error)
 	hl("NotifyWARNBorder", t.msg.warn.virtual)
-	hl("NotifyWARNIcon", t.msg.warn.norm)
-	hl("NotifyWARNTitle", t.msg.warn.norm)
+	hl("NotifyWARNIcon", t.msg.warn.warn)
+	hl("NotifyWARNTitle", t.msg.warn.warn)
 	hl("NotifyINFOBorder", t.msg.info.virtual)
-	hl("NotifyINFOIcon", t.msg.info.norm)
-	hl("NotifyINFOTitle", t.msg.info.norm)
+	hl("NotifyINFOIcon", t.msg.info.info)
+	hl("NotifyINFOTitle", t.msg.info.info)
 	hl("NotifyDEBUGBorder", t.passive.fg)
 	hl("NotifyDEBUGIcon", t.passive.fg)
 	hl("NotifyDEBUGTitle", t.passive.fg)
 	hl("NotifyTRACEBorder", t.msg.hint.virtual)
-	hl("NotifyTRACEIcon", t.msg.hint.norm)
-	hl("NotifyTRACETitle", t.msg.hint.norm)
+	hl("NotifyTRACEIcon", t.msg.hint.hint)
+	hl("NotifyTRACETitle", t.msg.hint.hint)
 
 	-- Noice
 	hl("NoiceCmdline", t.passive.fg)
-	hl("NoiceCmdlineIcon", t.msg.info.norm)
-	hl("NoiceCmdlineIconSearch", t.msg.warn.norm)
+	hl("NoiceCmdlineIcon", t.msg.info.info)
+	hl("NoiceCmdlineIconSearch", t.msg.warn.warn)
 	hl("NoiceCmdlinePopup", t.idle.passive_br)
-	hl("NoiceCmdlinePopupBorder", t.msg.info.norm)
-	hl("NoiceCmdlinePopupBorderSearch", t.msg.warn.norm)
-	hl("NoiceCmdlinePopupTitle", t.msg.info.norm)
+	hl("NoiceCmdlinePopupBorder", t.msg.info.info)
+	hl("NoiceCmdlinePopupBorderSearch", t.msg.warn.warn)
+	hl("NoiceCmdlinePopupTitle", t.msg.info.info)
 	hl("NoiceCmdlinePrompt", t.txt.title)
 	hl("NoiceConfirm", t.idle.passive_br)
-	hl("NoiceConfirmBorder", t.msg.info.norm)
+	hl("NoiceConfirmBorder", t.msg.info.info)
 	hl("NoiceCursor", t.txt.reverse)
 	hl("NoiceFormatConfirm", t.passive.bg)
 	hl("NoiceFormatConfirmDefault", t.active.visual)
@@ -500,7 +465,7 @@ function highlights.setup()
 	hl("NoiceFormatProgressDone", t.idle.search)
 	hl("NoiceFormatProgressTodo", t.passive.bg)
 	hl("NoiceLspProgressClient", t.txt.title)
-	hl("NoiceLspProgressSpinner", t.const.norm)
+	hl("NoiceLspProgressSpinner", t.consts.const)
 	hl("NoiceLspProgressTitle", t.passive.fg)
 	hl("NoiceMini", t.passive.fg)
 	hl("NoicePopup", t.idle.passive_br)
