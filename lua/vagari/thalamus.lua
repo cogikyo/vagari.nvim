@@ -5,6 +5,8 @@ local thalamus = {
 
 	txt = {
 		txt       = { fg = p.fg, bg = p.bg },
+    bright    = { fg = p.brt_1, fmt = "bold" },
+		file      = { fg = p.brt_0, bg = p.glc_0 },
 		minor     = { fg = p.slt_5 },
 		bold      = { fmt = "bold" },
 		italic    = { fg = p.blu_4, fmt = "italic" },
@@ -46,9 +48,11 @@ local thalamus = {
 	},
 
 	state = {
+    commit   = { fg = p.orn_4 },
 		new      = { fg = p.tyr_2 },
-		modified = { fg = p.glu_1 },
+		modified = { fg = p.sky_2 },
 		delete   = { fg = p.his_1 },
+    rename   = { fg = p.prp_2  },
 	},
 
 	msg = {
@@ -168,6 +172,14 @@ local thalamus = {
 		special     = { fg = p.sky_2 },
 		h1          = { fg = p.sky_2 },
 		deprecated  = { sp = p.sun_1, fmt = "strikethrough" },
+	},
+
+	-- File explorer
+	tree = {
+		file    = { fg = p.fg,    bg = p.glc_0 },
+		dir     = { fg = p.blu_3, fmt = "bold" },
+		symlink = { fg = p.sky_2, fmt = "italic" },
+		exec    = { fg = p.orn_3 },
 	},
 }
 
