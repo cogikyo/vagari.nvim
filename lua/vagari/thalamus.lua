@@ -109,7 +109,7 @@ local thalamus = {
 	consts = {
 		const      = { fg = p.sun_3 },                    -- base constant
 		readonly   = { fg = p.sun_2 },                    -- readonly vars
-		builtin    = { fg = p.orn_1, fmt = "italic" },    -- nil, true, false
+		builtin    = { fg = p.rby_3, fmt = "italic" },    -- nil, true, false
 		enumMember = { fg = p.orn_2, fmt = "italic" },    -- enum values
 		external   = { fg = p.asn_3, fmt = "italic" },    -- preprocessor
 	},
@@ -117,7 +117,7 @@ local thalamus = {
 	-- Types & Variables (blue/sky family)
 	types = {
 		struct     = { fg = p.blu_0, fmt = "italic" },    -- structs
-		builtin    = { fg = p.prp_2 },    -- int, bool, string
+		builtin    = { fg = p.prp_2, fmt = "italic" },    -- int, bool, string
 
 		class      = { fg = p.blu_1, fmt = "italic" },    -- classes
 		interface  = { fg = p.rby_2, fmt = "italic" },    -- interfaces
@@ -163,7 +163,7 @@ local thalamus = {
 	delimiters = {
 		delim    = { fg = p.glu_2 },
 		bracket  = { fg = p.glu_3 },
-		operator = { fg = p.brt_2, fmt = "bold" },
+		operator = { fg = p.sky_3, fmt = "bold" },
 	},
 
 	misc = {
