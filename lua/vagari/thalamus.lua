@@ -74,10 +74,10 @@ local thalamus = {
 			virtual = { fg = p.sun_4 },
 		},
 		hint = {
-			hint    = { fg = p.sky_3 },
+			hint    = { fg = p.pnk_4 },
 			under   = { sp = p.sky_1, fmt = "undercurl" },
 			special = { fg = p.sky_1 },
-			virtual = { fg = p.sky_4 },
+			virtual = { fg = p.glc_2 },
 		},
 		info = {
 			info    = { fg = p.cyn_3 },
