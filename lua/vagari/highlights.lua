@@ -361,11 +361,6 @@ function highlights.setup()
 	link("@tag.attribute", "VariableAttribute")
 	link("@tag.delimiter", "Delimiter")
 
-	-- Language-specific overrides
-	link("@type.toml", "Tag")
-	link("@property.toml", "VariableParameter")
-	link("@label.help", "Tag")
-
 	-- ========================================================================
 	-- DIAGNOSTICS
 	-- ========================================================================
