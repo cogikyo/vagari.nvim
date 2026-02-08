@@ -200,6 +200,33 @@ function plugins.setup()
 	hl("NoiceSplit", t.idle.passive_br)
 	hl("NoiceSplitBorder", t.idle.passive)
 	hl("NoiceVirtualText", t.msg.info.virtual)
+
+	-- ========================================================================
+	-- Neominimap
+	-- ========================================================================
+
+	hl("NeominimapBorder", t.idle.passive)
+	hl("NeominimapCursorLine", t.active.visual)
+	hl("NeominimapCursorLineNr", t.active.select)
+	hl("NeominimapCursorLineSign", t.active.visual)
+	hl("NeominimapCursorLineFold", t.active.visual)
+
+	-- Git
+	hl("NeominimapGitAddSign", t.state.add)
+	hl("NeominimapGitAddLine", t.state.add_ln)
+	hl("NeominimapGitChangeSign", t.state.dirty)
+	hl("NeominimapGitChangeLine", t.state.dirty_ln)
+	hl("NeominimapGitDeleteSign", t.state.delete)
+	hl("NeominimapGitDeleteLine", t.state.delete_ln)
+
+	-- Diagnostics
+	hl("NeominimapErrorLine", t.msg.error.virtual)
+	hl("NeominimapWarnLine", t.msg.warn.virtual)
+	hl("NeominimapInfoLine", t.msg.info.virtual)
+	hl("NeominimapHintLine", t.msg.hint.virtual)
+
+	-- Search
+	hl("NeominimapSearchLine", t.active.search)
 end
 
 return plugins
