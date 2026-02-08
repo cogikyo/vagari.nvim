@@ -1,5 +1,24 @@
 local p = require("vagari.palette")
 
+local function blend(hex, alpha)
+	local bg = {
+		tonumber(p.bg:sub(2, 3), 16),
+		tonumber(p.bg:sub(4, 5), 16),
+		tonumber(p.bg:sub(6, 7), 16),
+	}
+	local fg = {
+		tonumber(hex:sub(2, 3), 16),
+		tonumber(hex:sub(4, 5), 16),
+		tonumber(hex:sub(6, 7), 16),
+	}
+	return string.format(
+		"#%02x%02x%02x",
+		math.floor(fg[1] * alpha + bg[1] * (1 - alpha) + 0.5),
+		math.floor(fg[2] * alpha + bg[2] * (1 - alpha) + 0.5),
+		math.floor(fg[3] * alpha + bg[3] * (1 - alpha) + 0.5)
+	)
+end
+
 -- stylua: ignore start
 local thalamus = {
 
@@ -48,11 +67,19 @@ local thalamus = {
 	},
 
 	state = {
-    commit   = { fg = p.orn_4 },
-		new      = { fg = p.tyr_2 },
-		modified = { fg = p.sky_2 },
-		delete   = { fg = p.his_1 },
-    rename   = { fg = p.prp_2  },
+    commit      = { fg = p.orn_4 },
+		add         = { fg = p.tyr_1 },
+		modified    = { fg = p.sky_2 },
+    dirty       = { fg = p.glu_1 },
+		delete      = { fg = p.his_1 },
+
+		new         = { fg = p.sun_2 },
+    rename      = { fg = p.prp_2  },
+
+		new_ln      = { bg = blend(p.pro_0, 0.30) },
+		add_ln      = { bg = blend(p.tyr_0, 0.30) },
+		dirty_ln    = { bg = blend(p.glu_0, 0.30) },
+		delete_ln   = { bg = blend(p.his_0, 0.30) },
 	},
 
 	msg = {

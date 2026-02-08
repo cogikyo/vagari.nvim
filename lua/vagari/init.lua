@@ -15,7 +15,9 @@ vagari.load = function()
 	vim.g.colors_name = "vagari"
 
 	require("vagari.highlights").setup()
+	require("vagari.lsp").setup()
 	require("vagari.languages").setup()
+	require("vagari.plugins").setup()
 	require("vagari.terminal").setup()
 end
 

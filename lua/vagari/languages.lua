@@ -3,19 +3,11 @@
 -- ============================================================================
 
 local p = require("vagari.palette")
+local h = require("vagari.helpers")
+local hl = h.hl
+local link = h.link
 
 local languages = {}
-
-local function hl(name, def)
-	local result = {}
-	if def.fg then result.fg = def.fg end
-	if def.bg then result.bg = def.bg end
-	vim.api.nvim_set_hl(0, name, result)
-end
-
-local function link(name, target)
-	vim.api.nvim_set_hl(0, name, { link = target })
-end
 
 -- stylua: ignore start
 function languages.setup()

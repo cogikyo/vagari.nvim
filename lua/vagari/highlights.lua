@@ -5,44 +5,11 @@
 -- ============================================================================
 
 local t = require("vagari.thalamus")
+local h = require("vagari.helpers")
+local hl = h.hl
+local link = h.link
 
 local highlights = {}
-
--- Convert thalamus format to nvim_set_hl format
--- thalamus uses: { fg, bg, sp, fmt } where fmt = "bold,italic"
--- nvim_set_hl expects: { fg, bg, sp, bold = true, italic = true }
-local function convert(def)
-	if not def or type(def) ~= "table" then
-		-- Return empty but valid highlight (inherits from Normal)
-		return {}
-	end
-	local result = {}
-	if def.fg then
-		result.fg = def.fg
-	end
-	if def.bg then
-		result.bg = def.bg
-	end
-	if def.sp then
-		result.sp = def.sp
-	end
-	if def.fmt and type(def.fmt) == "string" then
-		for attr in def.fmt:gmatch("[^,]+") do
-			result[attr] = true
-		end
-	end
-	return result
-end
-
--- Modern API: nvim_set_hl replaces entire definition
-local function hl(name, val)
-	vim.api.nvim_set_hl(0, name, convert(val))
-end
-
--- Helper for link-only definitions
-local function link(name, target)
-	vim.api.nvim_set_hl(0, name, { link = target })
-end
 
 function highlights.setup()
 	-- Ensure thalamus loaded correctly
@@ -111,8 +78,8 @@ function highlights.setup()
 	hl("Substitute", t.active.search)
 
 	-- Diff
-	hl("DiffAdd", t.state.new)
-	hl("DiffNew", t.state.new)
+	hl("DiffAdd", t.state.add)
+	hl("DiffNew", t.state.add)
 	hl("DiffChange", t.state.modified)
 	hl("DiffText", t.state.modified)
 	hl("DiffDelete", t.state.delete)
@@ -195,10 +162,6 @@ function highlights.setup()
 	hl("SpecialChar", t.misc.specialchar)
 	hl("Delimiter", t.delimiters.delim)
 
-	-- Apply all LSP highlights from thalamus
-	for group, def in pairs(t.lsp) do
-		hl(group, def)
-	end
 	hl("SpecialComment", t.msg.hint.special)
 	hl("Debug", t.msg.hint.special)
 	hl("Ignore", t.passive.fg)
@@ -360,209 +323,6 @@ function highlights.setup()
 	link("@tag.builtin", "Tag")
 	link("@tag.attribute", "VariableAttribute")
 	link("@tag.delimiter", "Delimiter")
-
-	-- ========================================================================
-	-- DIAGNOSTICS
-	-- ========================================================================
-
-	hl("DiagnosticError", t.msg.error.error)
-	hl("DiagnosticHint", t.msg.hint.hint)
-	hl("DiagnosticInfo", t.msg.info.info)
-	hl("DiagnosticWarn", t.msg.warn.warn)
-
-	hl("DiagnosticVirtualTextError", t.msg.error.virtual)
-	hl("DiagnosticVirtualTextWarn", t.msg.warn.virtual)
-	hl("DiagnosticVirtualTextInfo", t.msg.info.virtual)
-	hl("DiagnosticVirtualTextHint", t.msg.hint.virtual)
-
-	hl("DiagnosticUnderlineError", t.msg.error.under)
-	hl("DiagnosticUnderlineHint", t.msg.hint.under)
-	hl("DiagnosticUnderlineInfo", t.msg.info.under)
-	hl("DiagnosticUnderlineWarn", t.msg.warn.under)
-
-	-- LSP references
-	hl("LspReferenceText", t.txt.bold)
-	hl("LspReferenceWrite", t.active.search)
-	hl("LspReferenceRead", t.idle.ref)
-
-	-- ========================================================================
-	-- PLUGINS
-	-- ========================================================================
-
-	-- GitSigns
-	hl("GitSignsAdd", t.state.new)
-	hl("GitSignsAddLn", t.state.new)
-	hl("GitSignsAddNr", t.state.new)
-	hl("GitSignsChange", t.state.modified)
-	hl("GitSignsChangeLn", t.state.modified)
-	hl("GitSignsChangeNr", t.state.modified)
-	hl("GitSignsDelete", t.state.delete)
-	hl("GitSignsDeleteLn", t.state.delete)
-	hl("GitSignsDeleteNr", t.state.delete)
-
-	-- NvimTree
-	-- Window
-	hl("NvimTreeNormal", t.tree.file)
-	hl("NvimTreeNormalFloat", t.tree.file)
-	hl("NvimTreeNormalFloatBorder", t.idle.passive)
-	hl("NvimTreeNormalNC", t.tree.file)
-	hl("NvimTreeEndOfBuffer", t.idle.invis_br)
-	hl("NvimTreeLineNr", t.passive.comment)
-	hl("NvimTreeWinSeparator", t.idle.passive)
-	hl("NvimTreePopup", t.idle.passive_br)
-	hl("NvimTreeSignColumn", t.passive.comment)
-	hl("NvimTreeCursorColumn", t.passive.bg)
-	hl("NvimTreeCursorLine", t.passive.bg)
-	hl("NvimTreeCursorLineNr", t.idle.passive)
-	hl("NvimTreeStatusLine", t.passive.passive)
-	hl("NvimTreeStatusLineNC", t.passive.passive)
-
-	-- Folders
-	hl("NvimTreeRootFolder", t.tree.dir)
-	hl("NvimTreeFolderName", t.tree.dir)
-	hl("NvimTreeEmptyFolderName", t.tree.dir)
-	hl("NvimTreeOpenedFolderName", t.tree.dir)
-	hl("NvimTreeSymlinkFolderName", t.tree.symlink)
-	hl("NvimTreeFolderIcon", t.idle.idle)
-	hl("NvimTreeOpenedFolderIcon", t.idle.idle)
-	hl("NvimTreeClosedFolderIcon", t.idle.idle)
-	hl("NvimTreeFolderArrowClosed", t.passive.comment)
-	hl("NvimTreeFolderArrowOpen", t.passive.comment)
-	hl("NvimTreeIndentMarker", t.passive.comment)
-
-	-- Files
-	hl("NvimTreeFileIcon", t.idle.idle)
-	hl("NvimTreeExecFile", t.tree.exec)
-	hl("NvimTreeSpecialFile", t.tree.file)
-	hl("NvimTreeImageFile", t.tree.file)
-	hl("NvimTreeSymlink", t.tree.symlink)
-	hl("NvimTreeSymlinkIcon", t.tree.symlink)
-
-	-- Git
-	hl("NvimTreeGitDirty", t.state.modified)
-	hl("NvimTreeGitNew", t.state.new)
-	hl("NvimTreeGitDeleted", t.state.delete)
-	hl("NvimTreeGitStaged", t.state.new)
-	hl("NvimTreeGitMerge", t.state.modified)
-	hl("NvimTreeGitRenamed", t.state.modified)
-	hl("NvimTreeGitIgnored", t.passive.comment)
-	hl("NvimTreeGitDirtyIcon", t.state.modified)
-	hl("NvimTreeGitNewIcon", t.state.new)
-	hl("NvimTreeGitDeletedIcon", t.state.delete)
-	hl("NvimTreeGitStagedIcon", t.state.commit)
-	hl("NvimTreeGitMergeIcon", t.state.modified)
-	hl("NvimTreeGitRenamedIcon", t.state.rename)
-	hl("NvimTreeGitIgnoredIcon", t.passive.comment)
-	hl("NvimTreeGitFileDeletedHL", t.state.delete)
-	hl("NvimTreeGitFileDirtyHL", t.state.modified)
-	hl("NvimTreeGitFileIgnoredHL", t.passive.comment)
-	hl("NvimTreeGitFileMergeHL", t.state.modified)
-	hl("NvimTreeGitFileNewHL", t.state.new)
-	hl("NvimTreeGitFileRenamedHL", t.state.modified)
-	hl("NvimTreeGitFileStagedHL", t.state.commit)
-	hl("NvimTreeGitFolderDeletedHL", t.state.delete)
-	hl("NvimTreeGitFolderDirtyHL", t.state.modified)
-	hl("NvimTreeGitFolderIgnoredHL", t.passive.comment)
-	hl("NvimTreeGitFolderMergeHL", t.state.modified)
-	hl("NvimTreeGitFolderNewHL", t.state.new)
-	hl("NvimTreeGitFolderRenamedHL", t.state.rename)
-	hl("NvimTreeGitFolderStagedHL", t.state.commit)
-
-	-- Diagnostics
-	hl("NvimTreeDiagnosticErrorIcon", t.msg.error.error)
-	hl("NvimTreeDiagnosticWarnIcon", t.msg.warn.warn)
-	hl("NvimTreeDiagnosticInfoIcon", t.msg.info.info)
-	hl("NvimTreeDiagnosticHintIcon", t.msg.hint.hint)
-	hl("NvimTreeDiagnosticErrorFileHL", t.msg.error.error)
-	hl("NvimTreeDiagnosticWarnFileHL", t.msg.warn.warn)
-	hl("NvimTreeDiagnosticInfoFileHL", t.msg.info.info)
-	hl("NvimTreeDiagnosticHintFileHL", t.msg.hint.hint)
-	hl("NvimTreeDiagnosticErrorFolderHL", t.msg.error.error)
-	hl("NvimTreeDiagnosticWarnFolderHL", t.msg.warn.warn)
-	hl("NvimTreeDiagnosticInfoFolderHL", t.msg.info.info)
-	hl("NvimTreeDiagnosticHintFolderHL", t.msg.hint.hint)
-
-	-- Misc
-	hl("NvimTreeWindowPicker", t.active.select)
-	hl("NvimTreeLiveFilterPrefix", t.active.active)
-	hl("NvimTreeLiveFilterValue", t.txt.txt)
-	hl("NvimTreeCutHL", t.state.delete)
-	hl("NvimTreeCopiedHL", t.state.new)
-	hl("NvimTreeBookmarkIcon", t.msg.hint.hint)
-	hl("NvimTreeBookmarkHL", t.msg.hint.hint)
-	hl("NvimTreeModifiedIcon", t.state.modified)
-	hl("NvimTreeModifiedFileHL", t.state.modified)
-	hl("NvimTreeModifiedFolderHL", t.state.modified)
-	hl("NvimTreeHiddenIcon", t.passive.comment)
-	hl("NvimTreeHiddenFileHL", t.passive.comment)
-	hl("NvimTreeHiddenFolderHL", t.passive.comment)
-	hl("NvimTreeHiddenDisplay", t.passive.comment)
-	hl("NvimTreeOpenedHL", t.tree.file)
-
-	-- Telescope
-	hl("TelescopeNormal", t.idle.passive_br)
-	hl("TelescopeBorder", t.idle.passive_br)
-	hl("TelescopeTitle", t.idle.bold)
-	hl("TelescopePromptNormal", t.active.input)
-	hl("TelescopePromptBorder", t.active.input)
-	hl("TelescopePromptTitle", t.active.input)
-	hl("TelescopeMatching", t.active.search)
-	hl("TelescopePromptPrefix", t.active.active)
-	hl("TelescopeSelection", t.active.select)
-	hl("TelescopeSelectionCaret", t.active.select)
-
-	-- Notify
-	hl("NotifyERRORBorder", t.msg.error.virtual)
-	hl("NotifyERRORIcon", t.msg.error.error)
-	hl("NotifyERRORTitle", t.msg.error.error)
-	hl("NotifyWARNBorder", t.msg.warn.virtual)
-	hl("NotifyWARNIcon", t.msg.warn.warn)
-	hl("NotifyWARNTitle", t.msg.warn.warn)
-	hl("NotifyINFOBorder", t.msg.info.virtual)
-	hl("NotifyINFOIcon", t.msg.info.info)
-	hl("NotifyINFOTitle", t.msg.info.info)
-	hl("NotifyDEBUGBorder", t.passive.fg)
-	hl("NotifyDEBUGIcon", t.passive.fg)
-	hl("NotifyDEBUGTitle", t.passive.fg)
-	hl("NotifyTRACEBorder", t.msg.hint.virtual)
-	hl("NotifyTRACEIcon", t.msg.hint.hint)
-	hl("NotifyTRACETitle", t.msg.hint.hint)
-
-	-- Noice
-	hl("NoiceCmdline", t.passive.fg)
-	hl("NoiceCmdlineIcon", t.msg.info.info)
-	hl("NoiceCmdlineIconSearch", t.msg.warn.warn)
-	hl("NoiceCmdlinePopup", t.idle.passive_br)
-	hl("NoiceCmdlinePopupBorder", t.msg.info.info)
-	hl("NoiceCmdlinePopupBorderSearch", t.msg.warn.warn)
-	hl("NoiceCmdlinePopupTitle", t.msg.info.info)
-	hl("NoiceCmdlinePrompt", t.txt.title)
-	hl("NoiceConfirm", t.idle.passive_br)
-	hl("NoiceConfirmBorder", t.msg.info.info)
-	hl("NoiceCursor", t.txt.reverse)
-	hl("NoiceFormatConfirm", t.passive.bg)
-	hl("NoiceFormatConfirmDefault", t.active.visual)
-	hl("NoiceFormatLevelDebug", t.passive.fg)
-	hl("NoiceFormatLevelError", t.msg.error.virtual)
-	hl("NoiceFormatLevelInfo", t.msg.info.virtual)
-	hl("NoiceFormatLevelWarn", t.msg.warn.virtual)
-	hl("NoiceFormatProgressDone", t.idle.search)
-	hl("NoiceFormatProgressTodo", t.passive.bg)
-	hl("NoiceLspProgressClient", t.txt.title)
-	hl("NoiceLspProgressSpinner", t.consts.const)
-	hl("NoiceLspProgressTitle", t.passive.fg)
-	hl("NoiceMini", t.passive.fg)
-	hl("NoicePopup", t.idle.passive_br)
-	hl("NoicePopupBorder", t.idle.passive)
-	hl("NoicePopupmenu", t.idle.passive_br)
-	hl("NoicePopupmenuBorder", t.idle.passive)
-	link("NoicePopupmenuMatch", "Special")
-	hl("NoicePopupmenuSelected", t.active.select)
-	hl("NoiceScrollbar", t.idle.bg)
-	hl("NoiceScrollbarThumb", t.idle.solid)
-	hl("NoiceSplit", t.idle.passive_br)
-	hl("NoiceSplitBorder", t.idle.passive)
-	hl("NoiceVirtualText", t.msg.info.virtual)
 end
 
 return highlights
