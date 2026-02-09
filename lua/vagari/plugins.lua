@@ -30,17 +30,15 @@ function plugins.setup()
 	-- ========================================================================
 
 	-- Window
-	hl("NvimTreeNormal", t.tree.file)
 	hl("NvimTreeNormalFloat", t.tree.file)
+	hl("NvimTreeNormalFloatNC", t.passive.passive)
 	hl("NvimTreeNormalFloatBorder", t.idle.passive)
-	hl("NvimTreeNormalNC", t.tree.file)
-	hl("NvimTreeEndOfBuffer", t.idle.invis_br)
 	hl("NvimTreeLineNr", t.passive.comment)
-	hl("NvimTreeWinSeparator", t.idle.passive)
+	hl("NvimTreeWinSeparator", t.passive.invis)
 	hl("NvimTreePopup", t.idle.passive_br)
 	hl("NvimTreeSignColumn", t.passive.comment)
 	hl("NvimTreeCursorColumn", t.passive.bg)
-	hl("NvimTreeCursorLine", t.passive.bg)
+	hl("NvimTreeCursorLine", t.idle.bg)
 	hl("NvimTreeCursorLineNr", t.idle.passive)
 	hl("NvimTreeStatusLine", t.passive.passive)
 	hl("NvimTreeStatusLineNC", t.passive.passive)
@@ -125,7 +123,7 @@ function plugins.setup()
 	hl("NvimTreeHiddenFileHL", t.passive.comment)
 	hl("NvimTreeHiddenFolderHL", t.passive.comment)
 	hl("NvimTreeHiddenDisplay", t.passive.comment)
-	hl("NvimTreeOpenedHL", t.tree.file)
+	hl("NvimTreeOpenedHL", t.idle.passive)
 
 	-- ========================================================================
 	-- Telescope
@@ -200,6 +198,13 @@ function plugins.setup()
 	hl("NoiceSplit", t.idle.passive_br)
 	hl("NoiceSplitBorder", t.idle.passive)
 	hl("NoiceVirtualText", t.msg.info.virtual)
+
+	-- ========================================================================
+	-- Treesitter Context
+	-- ========================================================================
+
+	hl("TreesitterContext", t.idle.passive_br)
+	hl("TreesitterContextLineNumber", t.idle.passive_br)
 
 	-- ========================================================================
 	-- Neominimap

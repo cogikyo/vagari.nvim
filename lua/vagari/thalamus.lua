@@ -52,6 +52,7 @@ local thalamus = {
 		bg         = { bg = p.glc_2 },
 		passive    = { fg = p.blu_2, bg = p.drk_0 },
 		passive_br = { fg = p.blu_2, bg = p.glc_0 },
+		context    = { fg = p.blu_2, bg = p.glc_1 },
 		invis_br   = { fg = p.glc_0, bg = p.glc_0 },
 		bold       = { fg = p.blu_2, fmt = "bold" },
 		search     = { fg = p.blu_0 },
@@ -201,7 +202,6 @@ local thalamus = {
 		deprecated  = { sp = p.sun_1, fmt = "strikethrough" },
 	},
 
-	-- File explorer
 	tree = {
 		file    = { fg = p.fg,    bg = p.glc_0 },
 		dir     = { fg = p.blu_3, fmt = "bold" },
