@@ -103,10 +103,10 @@ func (s *Server) handleGetUser(w http.ResponseWriter, r *http.Request) {
 
 	// Simulated lookup
 	user := map[string]any{
-		"id":         id,
-		"email":      "user@example.com",
-		"created_at": time.Now().Add(-72 * time.Hour).Format(time.RFC3339),
-		"active":     true,
+		"id":          id,
+		"email":       "user@example.com",
+		"created_at":  time.Now().Add(-72 * time.Hour).Format(time.RFC3339),
+		"active":      true,
 		"login_count": 42,
 	}
 
