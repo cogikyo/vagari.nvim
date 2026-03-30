@@ -18,7 +18,6 @@ vagari.load = function()
 	require("vagari.lsp").setup()
 	require("vagari.languages").setup()
 	require("vagari.plugins").setup()
-	require("vagari.terminal").setup()
 
 	local plugin_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h:h")
 	if not vagari._dev_autocmd then
