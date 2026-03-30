@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vagari colorscheme preview page" />
+  <title>Vagari &mdash; Preview</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <style>
+    .hero {
+      display: grid;
+      place-items: center;
+      min-height: 60vh;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      background: linear-gradient(135deg, #7aa2f7, #ff9e64);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Main navigation" role="navigation">
+    <a href="/" class="logo" aria-current="page">Vagari</a>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#docs">Docs</a></li>
+    </ul>
+    <button type="button" aria-expanded="false" aria-controls="mobile-menu" id="menu-toggle">
+      &#9776;
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div>
+      <h1>Vagari Colorscheme</h1>
+      <p>A carefully crafted palette for Neovim</p>
+      <a href="#demo" class="btn btn--primary">Try it out &rarr;</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Features section -->
+    <section id="features" aria-labelledby="features-heading">
+      <h2 id="features-heading">Features</h2>
+      <div class="container">
+        <article class="card">
+          <h3>Treesitter Support</h3>
+          <p>Full <abbr title="Tree-sitter">TS</abbr> integration with semantic highlighting.</p>
+        </article>
+        <article class="card">
+          <h3>Accessible Colors</h3>
+          <p>All colors meet <strong>WCAG 2.1</strong> contrast requirements.</p>
+        </article>
+        <article class="card">
+          <h3>Plugin Ecosystem</h3>
+          <p>Works with <em>lualine</em>, <em>telescope</em>, and 20+ plugins.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section id="demo" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">Try a Preview</h2>
+      <form action="/api/preview" method="POST" novalidate>
+        <fieldset>
+          <legend>Configuration</legend>
+
+          <label for="theme-name">Theme name</label>
+          <input type="text" id="theme-name" name="name" required
+                 placeholder="my-theme" pattern="[a-z0-9-]+" class="input"
+                 aria-describedby="name-hint" autocomplete="off" />
+          <small id="name-hint">Lowercase letters, numbers, and hyphens only.</small>
+
+          <label for="variant">Variant</label>
+          <select id="variant" name="variant" class="input">
+            <option value="dark" selected>Dark</option>
+            <option value="light">Light</option>
+          </select>
+
+          <label for="contrast">
+            Contrast ratio:
+            <output for="contrast" id="contrast-value">4.5</output>
+          </label>
+          <input type="range" id="contrast" name="contrast"
+                 min="3" max="12" step="0.5" value="4.5"
+                 aria-valuemin="3" aria-valuemax="12" />
+
+          <div role="group" aria-label="Options">
+            <label>
+              <input type="checkbox" name="italics" checked />
+              Enable italics
+            </label>
+            <label>
+              <input type="checkbox" name="bold" checked />
+              Enable bold
+            </label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn--primary">Generate</button>
+        <button type="reset" class="btn">Reset</button>
+      </form>
+    </section>
+
+    <!-- Table -->
+    <section>
+      <h2>Color Palette</h2>
+      <table>
+        <caption>Primary colors with contrast ratios</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Hex</th>
+            <th scope="col">CR</th>
+            <th scope="col">Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Blue</td>
+            <td><code>#7aa2f7</code></td>
+            <td>5.12</td>
+            <td>Types, variables</td>
+          </tr>
+          <tr>
+            <td>Orange</td>
+            <td><code>#ff9e64</code></td>
+            <td>6.33</td>
+            <td>Functions, active</td>
+          </tr>
+          <tr>
+            <td>Green</td>
+            <td><code>#9ece6a</code></td>
+            <td>8.15</td>
+            <td>Strings</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2024 Vagari. Built with &#10084;&#65039; for Neovim.</p>
+    <nav aria-label="Footer">
+      <a href="https://github.com/example/vagari" rel="noopener noreferrer" target="_blank">GitHub</a>
+      <a href="/docs">Documentation</a>
+    </nav>
+  </footer>
+
+  <script type="module">
+    const slider = document.getElementById("contrast");
+    const output = document.getElementById("contrast-value");
+
+    slider?.addEventListener("input", (e) => {
+      output.textContent = e.target.value;
+    });
+
+    document.getElementById("menu-toggle")?.addEventListener("click", function () {
+      const expanded = this.getAttribute("aria-expanded") === "true";
+      this.setAttribute("aria-expanded", String(!expanded));
+    });
+  </script>
+</body>
+</html>
