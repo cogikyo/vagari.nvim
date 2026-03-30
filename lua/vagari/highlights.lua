@@ -7,7 +7,6 @@
 local t = require("vagari.thalamus")
 local h = require("vagari.helpers")
 local hl = h.hl
-local link = h.link
 
 local highlights = {}
 
