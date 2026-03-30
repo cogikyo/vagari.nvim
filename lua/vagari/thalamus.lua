@@ -163,270 +163,145 @@ msg = {
     },
 },
 
--- ============================================================================
 -- SYNTAX (treesitter superset)
--- Every @capture gets its own key — intentional sharing is visible
--- ============================================================================
 
--- @comment                       base comment
--- @comment.documentation         documentation comments
--- @comment.error                 ERROR, FIXME, DEPRECATED markers
--- @comment.warning               WARNING, FIX, HACK markers
--- @comment.todo                  TODO, WIP markers
--- @comment.note                  NOTE, INFO, XXX markers
--- Color: slt (slate) — desaturated blue, recedes from code
--- Markers use signal colors to stand out from surrounding comments
 comments = {
-    comment       = { fg = p.slt_2 },
-    documentation = { fg = p.glc_5 },
-    error         = { fg = p.rby_3 },
-    warning       = { fg = p.sun_3 },
-    todo          = { fg = p.sky_1 },
-    note          = { fg = p.cyn_3 },
+    comment       = { fg = p.slt_2 },                 -- @comment
+    documentation = { fg = p.slt_4, fmt = "italic" },  -- @comment.documentation
+    error         = { fg = p.rby_3 },                  -- @comment.error
+    warning       = { fg = p.sun_3 },                  -- @comment.warning
+    todo          = { fg = p.sky_1 },                  -- @comment.todo
+    note          = { fg = p.cyn_3 },                  -- @comment.note
 },
 
--- @string                        string literals
--- @string.documentation          docstrings (Python, Lua)
--- @string.regexp                 regular expressions
--- @string.escape                 escape sequences (\n, \t)
--- @string.special                other special strings (dates, etc.)
--- @string.special.symbol         symbols or atoms (:ruby_symbol)
--- @string.special.path           filenames
--- @string.special.url            URIs, hyperlinks
--- @character                     character literals ('a')
--- @character.special             special characters (wildcards)
--- Color: grn (green) — universal convention, green = text data
--- escape/char use tyr (tyrian green) — distinct from string content
--- url uses tyr_3 — link color, navigable
 strings = {
-    str           = { fg = p.grn_3 },
-    documentation = { fg = p.glc_5 },
-    regexp        = { fg = p.grn_1 },
-    escape        = { fg = p.tyr_2 },
-    special       = { fg = p.grn_4 },
-    symbol        = { fg = p.sky_1 },
-    path          = { fg = p.grn_4 },
-    url           = { fg = p.tyr_3 },
-    char          = { fg = p.tyr_2 },
-    char_special  = { fg = p.sky_0 },
+    str           = { fg = p.grn_3 },                  -- @string
+    documentation = { fg = p.glc_3 },                  -- @string.documentation
+    regexp        = { fg = p.grn_1 },                  -- @string.regexp
+    escape        = { fg = p.tyr_2 },                  -- @string.escape
+    special       = { fg = p.grn_4 },                  -- @string.special
+    symbol        = { fg = p.sky_1 },                  -- @string.special.symbol
+    path          = { fg = p.grn_4 },                  -- @string.special.path
+    url           = { fg = p.tyr_3 },                  -- @string.special.url
+    char          = { fg = p.tyr_2 },                  -- @character
+    char_special  = { fg = p.sky_0 },                  -- @character.special
 },
 
--- @number                        numeric literals
--- @number.float                  floating-point numbers
--- @boolean                       boolean literals (true/false)
--- Color: pnk (pink) for numbers, cyn (cyan) for booleans
--- Both are rare in most code — small accent that doesn't dominate
 numbers = {
-    number        = { fg = p.pnk_2 },
-    float         = { fg = p.pnk_4 },
-    boolean       = { fg = p.cyn_2 },
+    number        = { fg = p.pnk_2 },                  -- @number
+    float         = { fg = p.pnk_4 },                  -- @number.float
+    boolean       = { fg = p.cyn_2 },                  -- @boolean
 },
 
--- @variable                      various variable names
--- @variable.builtin              self, this, cls
--- @variable.parameter            function parameters
--- @variable.parameter.builtin    special params (_, it)
--- @variable.member               object/struct fields
--- @property                      key in key/value pairs
--- @module                        modules or namespaces
--- @module.builtin                built-in modules
--- @label                         GOTO labels, heredoc labels
--- Color: fg/brt/sky (blue-tinted white ecosystem)
--- Most common tokens — should feel neutral, part of the text
--- module uses orn (orange) — imported namespaces feel like function-adjacent
--- label uses prp (purple) — control flow adjacent
 identifiers = {
-    variable      = { fg = p.blu_4 },
-    builtin       = { fg = p.sky_1 },
-    parameter     = { fg = p.sky_3 },
-    param_builtin = { fg = p.sky_1 },
-    member        = { fg = p.brt_1 },
-    property      = { fg = p.sky_4 },
-    module        = { fg = p.orn_3, fmt = "italic" },
-    module_builtin = { fg = p.orn_2, fmt = "bold" },
-    label         = { fg = p.prp_3 },
+    variable       = { fg = p.brt_0 },                 -- @variable
+    builtin        = { fg = p.sky_1 },                 -- @variable.builtin
+    parameter      = { fg = p.sky_3 },                 -- @variable.parameter
+    param_builtin  = { fg = p.sky_1 },                 -- @variable.parameter.builtin
+    member         = { fg = p.brt_1 },                 -- @variable.member
+    property       = { fg = p.blu_3 },                 -- @property
+    module         = { fg = p.blu_4, fmt = "italic" }, -- @module
+    module_builtin = { fg = p.blu_2, fmt = "bold" },   -- @module.builtin
+    label          = { fg = p.prp_3 },                 -- @label
 },
 
--- @function                      function definitions
--- @function.builtin              built-in functions (print, len, make)
--- @function.call                 function calls
--- @function.macro                preprocessor macros
--- @function.method               method definitions
--- @function.method.call          method calls
--- @constructor                   constructor calls and definitions
--- Color: orn (orange) — main accent color
--- Contrast: call (bright orn_4) → def (mid orn_3, bold) → builtin (darker orn_2, bold)
--- constructor uses blu (types family) — it creates types
--- decorator uses asn (accent purple) — metadata, not a function call
 functions = {
-    call          = { fg = p.orn_4 },
-    method        = { fg = p.orn_4 },
-    method_call   = { fg = p.orn_4 },
-    def           = { fg = p.orn_3, fmt = "bold" },
-    builtin       = { fg = p.orn_2, fmt = "bold" },
-    macro         = { fg = p.orn_3, fmt = "italic" },
-    constructor   = { fg = p.blu_2, fmt = "bold" },
-    decorator     = { fg = p.asn_2, fmt = "italic" },
+    call          = { fg = p.orn_4 },                  -- @function.call
+    method        = { fg = p.orn_4 },                  -- @function.method
+    method_call   = { fg = p.orn_4 },                  -- @function.method.call
+    def           = { fg = p.orn_3, fmt = "bold" },    -- @function
+    builtin       = { fg = p.orn_2, fmt = "bold" },    -- @function.builtin
+    macro         = { fg = p.orn_3, fmt = "italic" },  -- @function.macro
+    constructor   = { fg = p.blu_2, fmt = "bold" },    -- @constructor
+    decorator     = { fg = p.asn_2, fmt = "italic" },  -- @decorator
 },
 
--- @type                          type or class definitions
--- @type.builtin                  built-in types (int, bool, string)
--- @type.definition               identifiers in type definitions
--- @type.qualifier                type qualifiers (const, volatile)
--- @attribute                     annotations (decorators, lifetimes)
--- @attribute.builtin             built-in annotations (@property)
--- Color: blu (blue family), italic distinguishes from identifiers
--- builtin uses prp (purple) — reads like a keyword in most languages
--- interface uses rby (ruby) — contracts are important, deserve signal
--- enum uses orn — accent, stands out from regular types
--- attr uses asn (accent purple) — metadata boundary
--- attr_builtin uses rby — built-in annotations are important to notice
 types = {
-    attr          = { fg = p.asn_2, fmt = "italic" },
-    attr_builtin  = { fg = p.rby_3, fmt = "italic" },
-    builtin       = { fg = p.prp_2, fmt = "italic" },
-    class         = { fg = p.blu_1, fmt = "italic" },
-    definition    = { fg = p.blu_2, fmt = "bold" },
-    enum          = { fg = p.orn_2, fmt = "italic" },
-    interface     = { fg = p.rby_2, fmt = "italic" },
-    member        = { fg = p.brt_1 },
-    param         = { fg = p.blu_1, fmt = "italic" },
-    qualifier     = { fg = p.blu_0, fmt = "italic" },
-    store         = { fg = p.blu_3, fmt = "italic" },
-    struct        = { fg = p.blu_0, fmt = "italic" },
-    type          = { fg = p.blu_2, fmt = "italic" },
+    attr          = { fg = p.asn_2, fmt = "italic" },  -- @attribute: decorators, lifetimes
+    attr_builtin  = { fg = p.rby_3, fmt = "italic" },  -- @attribute.builtin: @property
+    builtin       = { fg = p.blu_1, fmt = "italic" },  -- @type.builtin: int, bool, string
+    class         = { fg = p.blu_1, fmt = "italic" },  -- @type: class definitions
+    definition    = { fg = p.blu_2, fmt = "bold" },    -- @type.definition: type name in declaration
+    enum          = { fg = p.orn_2, fmt = "italic" },  -- @type: enum definitions
+    interface     = { fg = p.rby_2, fmt = "italic" },  -- @type: interface definitions
+    member        = { fg = p.blu_3 },                  -- @type: member types
+    param         = { fg = p.blu_1, fmt = "italic" },  -- @type: type parameters, generics
+    qualifier     = { fg = p.blu_0, fmt = "italic" },  -- @type.qualifier: const, volatile
+    store         = { fg = p.blu_3, fmt = "italic" },  -- @storageclass: static, extern
+    struct        = { fg = p.blu_0, fmt = "italic" },  -- @type: struct definitions
+    type          = { fg = p.blu_2, fmt = "italic" },  -- @type: general type references
 },
 
--- @constant                      constant identifiers
--- @constant.builtin              nil, true, false
--- @constant.macro                preprocessor constants
--- Color: sun (warm yellow) — "fixed value" feeling
--- builtin uses rby (ruby) — nil/true/false are important to notice
--- macro uses asn — preprocessor boundary
--- enum_member uses orn — accent, matches enum type
 constants = {
-    constant      = { fg = p.sun_3 },
-    builtin       = { fg = p.rby_3, fmt = "italic" },
-    macro         = { fg = p.asn_3, fmt = "italic" },
-    enum_member   = { fg = p.orn_2, fmt = "italic" },
+    constant      = { fg = p.sun_3 },                  -- @constant: named constants
+    builtin       = { fg = p.rby_3, fmt = "italic" },  -- @constant.builtin: nil, true, false
+    macro         = { fg = p.asn_3, fmt = "italic" },  -- @constant.macro: preprocessor constants
+    enum_member   = { fg = p.orn_2, fmt = "italic" },  -- @lsp.type.enumMember: enum values
 },
 
--- @keyword                       general keywords
--- @keyword.coroutine             go, async, await
--- @keyword.function              func, def, fn
--- @keyword.operator              and, or, not, in
--- @keyword.import                import, from, include, require
--- @keyword.type                  struct, enum, class, interface
--- @keyword.modifier              const, static, public, private
--- @keyword.repeat                for, while, loop
--- @keyword.return                return, yield
--- @keyword.debug                 debug-related keywords
--- @keyword.exception             throw, catch, try, finally
--- @keyword.conditional           if, else, switch, match
--- @keyword.conditional.ternary   ?, : (ternary operator)
--- @keyword.directive             preprocessor directives, shebangs
--- @keyword.directive.define      #define
--- Color: prp (purple) — control flow and structure
--- Contrast: base (prp_2) → logic (prp_1, italic) → modifier (prp_3, italic)
--- import/directive uses asn (accent purple) — external boundary
--- exception uses rby (ruby) — error handling is signal-worthy
--- modifier uses blu_3 — behaves like type qualifier, blue family
--- debug uses sky_1 — hint-adjacent, informational
 keywords = {
-    keyword       = { fg = p.prp_2 },
-    coroutine     = { fg = p.prp_2, fmt = "bold" },
-    func          = { fg = p.prp_2, fmt = "bold" },
-    operator      = { fg = p.prp_1, fmt = "italic" },
-    import        = { fg = p.asn_2, fmt = "italic" },
-    import_def    = { fg = p.asn_2, fmt = "italic,bold" },
-    type          = { fg = p.prp_2, fmt = "bold" },
-    modifier      = { fg = p.prp_3, fmt = "italic" },
-    loop          = { fg = p.prp_1, fmt = "italic" },
-    flow          = { fg = p.prp_2, fmt = "italic,bold" },
-    debug         = { fg = p.sky_1 },
-    exception     = { fg = p.rby_2, fmt = "italic" },
-    conditional   = { fg = p.prp_1, fmt = "italic" },
-    ternary       = { fg = p.prp_2, fmt = "italic,bold" },
-    directive     = { fg = p.asn_2, fmt = "italic" },
-    directive_def = { fg = p.asn_2, fmt = "italic,bold" },
+    keyword       = { fg = p.prp_2 },                      -- @keyword: general keywords
+    coroutine     = { fg = p.prp_2, fmt = "bold" },         -- @keyword.coroutine: go, async, await
+    func          = { fg = p.prp_2, fmt = "bold" },         -- @keyword.function: func, def, fn
+    operator      = { fg = p.prp_1, fmt = "italic" },       -- @keyword.operator: and, or, not, in
+    import        = { fg = p.asn_2, fmt = "italic" },       -- @keyword.import: import, from, require
+    import_def    = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.import: define-style imports
+    type          = { fg = p.prp_2, fmt = "bold" },         -- @keyword.type: struct, enum, class
+    modifier      = { fg = p.prp_3, fmt = "italic" },      -- @keyword.modifier: const, static, public
+    loop          = { fg = p.prp_1, fmt = "italic" },       -- @keyword.repeat: for, while, loop
+    flow          = { fg = p.prp_2, fmt = "italic,bold" },  -- @keyword.return: return, yield
+    debug         = { fg = p.sky_1 },                       -- @keyword.debug: debug statements
+    exception     = { fg = p.rby_2, fmt = "italic" },       -- @keyword.exception: throw, catch, try
+    conditional   = { fg = p.prp_1, fmt = "italic" },       -- @keyword.conditional: if, else, match
+    ternary       = { fg = p.prp_2, fmt = "italic,bold" },  -- @keyword.conditional.ternary: ?, :
+    directive     = { fg = p.asn_2, fmt = "italic" },       -- @keyword.directive: preprocessor, shebangs
+    directive_def = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.directive.define: #define
 },
 
--- @punctuation.delimiter         ; . ,
--- @punctuation.bracket           () {} []
--- @punctuation.special           {} in string interpolation
--- @operator                      + * = symbolic operators
--- Color: glu (desaturated blue) — structural, recedes
--- operator uses sky_3 — slightly brighter because operators matter semantically
 delimiters = {
-    delimiter     = { fg = p.glu_2 },
-    bracket       = { fg = p.glu_3 },
-    special       = { fg = p.sky_2 },
-    operator      = { fg = p.sky_3, fmt = "bold" },
+    delimiter     = { fg = p.glu_2 },                 -- @punctuation.delimiter: ; . ,
+    bracket       = { fg = p.glu_3 },                 -- @punctuation.bracket: () {} []
+    special       = { fg = p.sky_2 },                 -- @punctuation.special: interpolation braces
+    operator      = { fg = p.sky_4, fmt = "bold" },   -- @operator: + * = symbolic operators
 },
 
--- @tag                           XML-style tag names
--- @tag.builtin                   built-in tags (HTML5)
--- @tag.attribute                 tag attributes
--- @tag.delimiter                 < > / in tags
--- Color: sky — HTML/XML domain
 tags = {
-    tag           = { fg = p.sky_1 },
-    builtin       = { fg = p.sky_1 },
-    attribute     = { fg = p.sky_3, fmt = "italic" },
-    delimiter     = { fg = p.glu_2 },
+    tag           = { fg = p.sky_1 },                  -- @tag: XML/HTML tag names
+    builtin       = { fg = p.sky_1 },                  -- @tag.builtin: HTML5 tags
+    attribute     = { fg = p.sky_3, fmt = "italic" },  -- @tag.attribute: tag attributes
+    delimiter     = { fg = p.glu_2 },                  -- @tag.delimiter: < > /
 },
 
--- @markup.strong                 **bold**
--- @markup.italic                 *italic*
--- @markup.strikethrough          ~~struck~~
--- @markup.underline              underlined text
--- @markup.heading                heading (generic)
--- @markup.heading.1-6            heading levels
--- @markup.quote                  > blockquote
--- @markup.math                   $math$
--- @markup.link                   text references, footnotes
--- @markup.link.label             link descriptions
--- @markup.link.url               URL-style links
--- @markup.raw                    `inline code`
--- @markup.raw.block              ```fenced code blocks```
--- @markup.list                   list markers
--- @markup.list.checked           [x] checked items
--- @markup.list.unchecked         [ ] unchecked items
--- Color: mixed — prose follows typography conventions more than code
 markup = {
-    strong        = { fmt = "bold" },
-    italic        = { fg = p.blu_4, fmt = "italic" },
-    strikethrough = { fg = p.slt_4, fmt = "strikethrough" },
-    underline     = { fg = p.brt_0, sp = p.brt_2, fmt = "underline" },
-    heading       = { fg = p.sky_2, fmt = "bold" },
-    heading_1     = { fg = p.sky_2, fmt = "bold" },
-    heading_2     = { fg = p.sky_2, fmt = "bold" },
-    heading_3     = { fg = p.sky_2, fmt = "bold" },
-    heading_4     = { fg = p.sky_2, fmt = "bold" },
-    heading_5     = { fg = p.sky_2, fmt = "bold" },
-    heading_6     = { fg = p.sky_2, fmt = "bold" },
-    quote         = { fg = p.slt_5 },
-    math          = { fg = p.sky_1 },
-    link          = { fg = p.slt_2 },
-    link_label    = { fg = p.sky_1 },
-    link_url      = { fg = p.tyr_3 },
-    raw           = { fg = p.grn_3 },
-    raw_block     = { fg = p.grn_3 },
-    list          = { fg = p.glu_2 },
-    list_checked  = { fg = p.emr_3 },
-    list_unchecked = { fg = p.slt_2 },
+    strong         = { fmt = "bold" },                                    -- @markup.strong: **bold**
+    italic         = { fg = p.blu_4, fmt = "italic" },                   -- @markup.italic: *italic*
+    strikethrough  = { fg = p.slt_4, fmt = "strikethrough" },            -- @markup.strikethrough: ~~struck~~
+    underline      = { fg = p.brt_0, sp = p.brt_2, fmt = "underline" }, -- @markup.underline
+    heading        = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading
+    heading_1      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.1
+    heading_2      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.2
+    heading_3      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.3
+    heading_4      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.4
+    heading_5      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.5
+    heading_6      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.6
+    quote          = { fg = p.slt_5 },                                   -- @markup.quote: > blockquote
+    math           = { fg = p.sky_1 },                                   -- @markup.math: $math$
+    link           = { fg = p.slt_2 },                                   -- @markup.link: references, footnotes
+    link_label     = { fg = p.sky_1 },                                   -- @markup.link.label
+    link_url       = { fg = p.tyr_3 },                                   -- @markup.link.url
+    raw            = { fg = p.grn_3 },                                   -- @markup.raw: `inline code`
+    raw_block      = { fg = p.grn_3 },                                   -- @markup.raw.block: ```fenced```
+    list           = { fg = p.glu_2 },                                   -- @markup.list: list markers
+    list_checked   = { fg = p.emr_3 },                                   -- @markup.list.checked: [x]
+    list_unchecked = { fg = p.slt_2 },                                   -- @markup.list.unchecked: [ ]
 },
 
--- @diff.plus                     added text
--- @diff.minus                    deleted text
--- @diff.delta                    changed text
 diff = {
-    plus          = { fg = p.tyr_1 },
-    minus         = { fg = p.his_1 },
-    delta         = { fg = p.sky_2 },
+    plus          = { fg = p.tyr_1 },                 -- @diff.plus: added text
+    minus         = { fg = p.his_1 },                 -- @diff.minus: deleted text
+    delta         = { fg = p.sky_2 },                 -- @diff.delta: changed text
 },
 
--- NvimTree file browser
 tree = {
     file    = { fg = p.fg,    bg = p.glc_0 },
     dir     = { fg = p.blu_3, fmt = "bold" },
@@ -434,7 +309,6 @@ tree = {
     exec    = { fg = p.orn_3 },
 },
 
--- Miscellaneous (things that don't map to a single treesitter category)
 misc = {
     deprecated  = { sp = p.sun_1, fmt = "strikethrough" },
     link        = { fg = p.tyr_3 },
