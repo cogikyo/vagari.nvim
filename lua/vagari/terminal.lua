@@ -11,7 +11,7 @@ local p = require("vagari.palette")
 function terminal.setup()
 	vim.g.terminal_color_0 = p.slt_0
 	vim.g.terminal_color_1 = p.rby_2
-	vim.g.terminal_color_2 = p.erm_2
+	vim.g.terminal_color_2 = p.emr_2
 	vim.g.terminal_color_3 = p.sun_2
 	vim.g.terminal_color_4 = p.blu_2
 	vim.g.terminal_color_5 = p.prp_2
@@ -19,7 +19,7 @@ function terminal.setup()
 	vim.g.terminal_color_7 = p.fg
 	vim.g.terminal_color_8 = p.slt_2
 	vim.g.terminal_color_9 = p.rby_4
-	vim.g.terminal_color_10 = p.erm_4
+	vim.g.terminal_color_10 = p.emr_4
 	vim.g.terminal_color_11 = p.sun_4
 	vim.g.terminal_color_12 = p.blu_4
 	vim.g.terminal_color_13 = p.prp_4
