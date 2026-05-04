@@ -22,7 +22,7 @@ function highlights.setup()
 
 	-- Core
 	hl("Normal", t.txt.txt)
-	hl("NormalNC", t.passive.passive)
+	hl("NormalNC", t.passive.bg)
 	hl("NormalFloat", t.idle.float)
 	hl("FloatBorder", t.idle.passive)
 	hl("FloatTitle", t.idle.bold)
