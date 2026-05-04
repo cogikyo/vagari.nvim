@@ -163,6 +163,8 @@ function highlights.setup()
 	-- @comment.* → thalamus.comments
 	hl("@comment", t.comments.comment)
 	hl("@comment.documentation", t.comments.documentation)
+	hl("@comment.documentation.go", t.comments.comment)
+	hl("@comment.documentation.godoc", t.comments.documentation)
 	hl("@comment.error", t.comments.error)
 	hl("@comment.warning", t.comments.warning)
 	hl("@comment.todo", t.comments.todo)

@@ -3,6 +3,7 @@
 -- ============================================================================
 
 local p = require("vagari.palette")
+local t = require("vagari.thalamus")
 local h = require("vagari.helpers")
 local hl = h.hl
 local link = h.link
@@ -24,8 +25,31 @@ function languages.setup()
 	-- Lua
 	hl("@property.lua", { fg = p.blu_3 })
 
+	-- Python
+	hl("@string.documentation.python", { fg = p.glc_5, fmt = "bold" })
+
+	-- CSS
+	hl("@function.css", { fg = p.orn_4 })
+	hl("@keyword.directive.css", { fg = p.rby_3, fmt = "italic" })
+	hl("@type.css", { fg = p.grn_4 })
+
+	-- HTML
+	hl("@character.special.html", { fg = p.glc_5, fmt = "italic" })
+
 	-- Help
 	link("@label.help", "Tag")
+
+	-- Markdown
+	hl("@markup.heading.markdown",        t.markup.heading)
+	hl("@markup.heading.1.markdown",      t.markup.heading_1)
+	hl("@markup.heading.2.markdown",      t.markup.heading_2)
+	hl("@markup.heading.3.markdown",      t.markup.heading_3)
+	hl("@markup.heading.4.markdown",      t.markup.heading_4)
+	hl("@markup.heading.5.markdown",      t.markup.heading_5)
+	hl("@markup.heading.6.markdown",      t.markup.heading_6)
+	hl("@markup.heading.marker.markdown", t.markup.heading)
+	hl("@markup.raw.markdown",       { fg = p.blu_3 })
+	hl("@markup.raw.block.markdown", { fg = p.blu_3 })
 
 end
 -- stylua: ignore end

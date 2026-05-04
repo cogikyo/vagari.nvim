@@ -14,10 +14,12 @@ vagari.load = function()
 	vim.o.termguicolors = true
 	vim.g.colors_name = "vagari"
 
+	require("vagari.treesitter").setup()
 	require("vagari.highlights").setup()
 	require("vagari.lsp").setup()
 	require("vagari.languages").setup()
 	require("vagari.plugins").setup()
+	require("vagari.editing").setup()
 
 end
 

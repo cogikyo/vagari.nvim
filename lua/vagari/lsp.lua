@@ -9,11 +9,6 @@ local hl = h.hl
 local lsp = {}
 
 function lsp.setup()
-	-- LSP semantic token overrides from thalamus
-	for group, def in pairs(t.lsp) do
-		hl(group, def)
-	end
-
 	-- Diagnostics
 	hl("DiagnosticError", t.msg.error.error)
 	hl("DiagnosticHint", t.msg.hint.hint)

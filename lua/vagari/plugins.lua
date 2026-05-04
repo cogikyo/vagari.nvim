@@ -9,6 +9,29 @@ local link = h.link
 
 local plugins = {}
 
+local function setup_render_markdown()
+	hl("RenderMarkdownH1", t.markup.heading_1)
+	hl("RenderMarkdownH2", t.markup.heading_2)
+	hl("RenderMarkdownH3", t.markup.heading_3)
+	hl("RenderMarkdownH4", t.markup.heading_4)
+	hl("RenderMarkdownH5", t.markup.heading_5)
+	hl("RenderMarkdownH6", t.markup.heading_6)
+
+	hl("RenderMarkdownH1Bg", {})
+	hl("RenderMarkdownH2Bg", {})
+	hl("RenderMarkdownH3Bg", {})
+	hl("RenderMarkdownH4Bg", {})
+	hl("RenderMarkdownH5Bg", {})
+	hl("RenderMarkdownH6Bg", {})
+
+	hl("RenderMarkdownCodeInline", t.markup.raw)
+
+	local ok, colors = pcall(require, "render-markdown.core.colors")
+	if ok then
+		colors.reload()
+	end
+end
+
 function plugins.setup()
 	-- ========================================================================
 	-- GitSigns
@@ -207,6 +230,13 @@ function plugins.setup()
 
 	hl("TreesitterContext", t.idle.float)
 	hl("TreesitterContextLineNumber", t.idle.float)
+
+	-- ========================================================================
+	-- render-markdown.nvim
+	-- ========================================================================
+
+	setup_render_markdown()
+	vim.schedule(setup_render_markdown)
 
 	-- ========================================================================
 	-- Neominimap
