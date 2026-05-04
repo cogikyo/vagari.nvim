@@ -21,6 +21,9 @@ function languages.setup()
 	link("@type.toml", "Tag")
 	link("@property.toml", "VariableParameter")
 
+	-- Lua
+	hl("@property.lua", { fg = p.blu_3 })
+
 	-- Help
 	link("@label.help", "Tag")
 

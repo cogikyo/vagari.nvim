@@ -28,12 +28,12 @@ end
 --   glc (glacier)  → backgrounds, surfaces         (CR 1.05–2.68)
 --   slt (slate)    → muted text, comments          (CR 1.32–3.97)
 --   glu (glue)     → delimiters, brackets          (CR 2.00–6.00)
---   blu (blue)     → types, variables, idle UI     (CR 3.24–7.29)
---   sky (sky)      → params, properties, operators (CR 5.12–9.11)
---   fg/brt         → base text, members            (CR 8.00–11.21)
+--   blu (blue)     → functions, methods, idle UI    (CR 3.24–7.29)
+--   sky (sky)      → params, properties, operators  (CR 5.12–9.11)
+--   fg/brt         → base text, types, members      (CR 8.00–11.21)
 --
 -- Accent (orange family):
---   orn (orange)   → functions, active state       (CR 4.66–8.56)
+--   orn (orange)   → constants, enums, active state (CR 4.66–8.56)
 --   asn (arsenic)  → decorators, imports           (CR 2.00–6.00)
 --
 -- Supporting:
@@ -166,7 +166,7 @@ msg = {
 -- SYNTAX (treesitter superset)
 
 comments = {
-    comment       = { fg = p.slt_2 },                 -- @comment
+    comment       = { fg = p.slt_2 },                  -- @comment
     documentation = { fg = p.slt_4, fmt = "italic" },  -- @comment.documentation
     error         = { fg = p.rby_3 },                  -- @comment.error
     warning       = { fg = p.sun_3 },                  -- @comment.warning
@@ -194,65 +194,67 @@ numbers = {
 },
 
 identifiers = {
-    variable       = { fg = p.brt_0 },                 -- @variable
-    builtin        = { fg = p.sky_1 },                 -- @variable.builtin
-    parameter      = { fg = p.sky_3 },                 -- @variable.parameter
-    param_builtin  = { fg = p.sky_1 },                 -- @variable.parameter.builtin
-    member         = { fg = p.brt_1 },                 -- @variable.member
-    property       = { fg = p.blu_3 },                 -- @property
+    variable       = { fg = p.fg },                    -- @variable
+    parameter      = { fg = p.orn_4 },                 -- @variable.parameter
+    param_builtin  = { fg = p.orn_3 },                 -- @variable.parameter.builtin
+    builtin        = { fg = p.orn_3 },                 -- @variable.builtin
+    member         = { fg = p.blu_3 },                 -- @variable.member
+
+    property       = { fg = p.orn_4 },                 -- @property
     module         = { fg = p.blu_4, fmt = "italic" }, -- @module
     module_builtin = { fg = p.blu_2, fmt = "bold" },   -- @module.builtin
     label          = { fg = p.prp_3 },                 -- @label
 },
 
-functions = {
-    call          = { fg = p.orn_4 },                  -- @function.call
-    method        = { fg = p.orn_4 },                  -- @function.method
-    method_call   = { fg = p.orn_4 },                  -- @function.method.call
-    def           = { fg = p.orn_3, fmt = "bold" },    -- @function
-    builtin       = { fg = p.orn_2, fmt = "bold" },    -- @function.builtin
-    macro         = { fg = p.orn_3, fmt = "italic" },  -- @function.macro
-    constructor   = { fg = p.blu_2, fmt = "bold" },    -- @constructor
+functions =                                               {
+    constructor   = { fg = p.brt_0, fmt = "bold" },    -- @constructor
+    call          = { fg = p.blu_3 },                  -- @function.call
+    method        = { fg = p.blu_3 },                  -- @function.method
+    method_call   = { fg = p.blu_2 },                  -- @function.method.call
+    def           = { fg = p.blu_2, fmt = "bold" },    -- @function
+    macro         = { fg = p.blu_2, fmt = "italic" },  -- @function.macro
+    builtin       = { fg = p.blu_0, fmt = "bold" },    -- @function.builtin
     decorator     = { fg = p.asn_2, fmt = "italic" },  -- @decorator
 },
 
 types = {
     attr          = { fg = p.asn_2, fmt = "italic" },  -- @attribute: decorators, lifetimes
     attr_builtin  = { fg = p.rby_3, fmt = "italic" },  -- @attribute.builtin: @property
-    builtin       = { fg = p.blu_1, fmt = "italic" },  -- @type.builtin: int, bool, string
-    class         = { fg = p.blu_1, fmt = "italic" },  -- @type: class definitions
-    definition    = { fg = p.blu_2, fmt = "bold" },    -- @type.definition: type name in declaration
+    builtin       = { fg = p.glu_3, fmt = "italic" },  -- @type.builtin: int, bool, string
+    class         = { fg = p.brt_0, fmt = "italic" },  -- @type: class definitions
+    definition    = { fg = p.brt_1, fmt = "bold" },    -- @type.definition: type name in declaration
     enum          = { fg = p.orn_2, fmt = "italic" },  -- @type: enum definitions
     interface     = { fg = p.rby_2, fmt = "italic" },  -- @type: interface definitions
-    member        = { fg = p.blu_3 },                  -- @type: member types
-    param         = { fg = p.blu_1, fmt = "italic" },  -- @type: type parameters, generics
-    qualifier     = { fg = p.blu_0, fmt = "italic" },  -- @type.qualifier: const, volatile
-    store         = { fg = p.blu_3, fmt = "italic" },  -- @storageclass: static, extern
-    struct        = { fg = p.blu_0, fmt = "italic" },  -- @type: struct definitions
-    type          = { fg = p.blu_2, fmt = "italic" },  -- @type: general type references
+    member        = { fg = p.brt_0 },                  -- @type: member types
+    param         = { fg = p.glu_3, fmt = "italic" },  -- @type: type parameters, generics
+    qualifier     = { fg = p.glu_2, fmt = "italic" },  -- @type.qualifier: const, volatile
+    store         = { fg = p.glu_3, fmt = "italic" },  -- @storageclass: static, extern
+    struct        = { fg = p.brt_0, fmt = "italic" },  -- @type: struct definitions
+    type          = { fg = p.brt_0, fmt = "italic" },  -- @type: general type references
 },
 
 constants = {
-    constant      = { fg = p.sun_3 },                  -- @constant: named constants
+    constant      = { fg = p.orn_3 },                  -- @constant: named constants
     builtin       = { fg = p.rby_3, fmt = "italic" },  -- @constant.builtin: nil, true, false
-    macro         = { fg = p.asn_3, fmt = "italic" },  -- @constant.macro: preprocessor constants
+    macro         = { fg = p.orn_1, fmt = "italic" },  -- @constant.macro: preprocessor constants
     enum_member   = { fg = p.orn_2, fmt = "italic" },  -- @lsp.type.enumMember: enum values
 },
 
 keywords = {
-    keyword       = { fg = p.prp_2 },                      -- @keyword: general keywords
+    keyword       = { fg = p.prp_2 },                       -- @keyword: general keywords
     coroutine     = { fg = p.prp_2, fmt = "bold" },         -- @keyword.coroutine: go, async, await
     func          = { fg = p.prp_2, fmt = "bold" },         -- @keyword.function: func, def, fn
     operator      = { fg = p.prp_1, fmt = "italic" },       -- @keyword.operator: and, or, not, in
     import        = { fg = p.asn_2, fmt = "italic" },       -- @keyword.import: import, from, require
     import_def    = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.import: define-style imports
     type          = { fg = p.prp_2, fmt = "bold" },         -- @keyword.type: struct, enum, class
-    modifier      = { fg = p.prp_3, fmt = "italic" },      -- @keyword.modifier: const, static, public
+    modifier      = { fg = p.prp_3, fmt = "italic" },       -- @keyword.modifier: const, static, public
     loop          = { fg = p.prp_1, fmt = "italic" },       -- @keyword.repeat: for, while, loop
-    flow          = { fg = p.prp_2, fmt = "italic,bold" },  -- @keyword.return: return, yield
+    flow          = { fg = p.prp_2, fmt = "italic" },       -- @keyword.return: return, yield
     debug         = { fg = p.sky_1 },                       -- @keyword.debug: debug statements
-    exception     = { fg = p.rby_2, fmt = "italic" },       -- @keyword.exception: throw, catch, try
     conditional   = { fg = p.prp_1, fmt = "italic" },       -- @keyword.conditional: if, else, match
+
+    exception     = { fg = p.rby_2, fmt = "italic" },       -- @keyword.exception: throw, catch, try
     ternary       = { fg = p.prp_2, fmt = "italic,bold" },  -- @keyword.conditional.ternary: ?, :
     directive     = { fg = p.asn_2, fmt = "italic" },       -- @keyword.directive: preprocessor, shebangs
     directive_def = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.directive.define: #define
@@ -273,10 +275,10 @@ tags = {
 },
 
 markup = {
-    strong         = { fmt = "bold" },                                    -- @markup.strong: **bold**
+    strong         = { fmt = "bold" },                                   -- @markup.strong: **bold**
     italic         = { fg = p.blu_4, fmt = "italic" },                   -- @markup.italic: *italic*
     strikethrough  = { fg = p.slt_4, fmt = "strikethrough" },            -- @markup.strikethrough: ~~struck~~
-    underline      = { fg = p.brt_0, sp = p.brt_2, fmt = "underline" }, -- @markup.underline
+    underline      = { fg = p.brt_0, sp = p.brt_2, fmt = "underline" },  -- @markup.underline
     heading        = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading
     heading_1      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.1
     heading_2      = { fg = p.sky_2, fmt = "bold" },                     -- @markup.heading.2
@@ -297,9 +299,9 @@ markup = {
 },
 
 diff = {
-    plus          = { fg = p.tyr_1 },                 -- @diff.plus: added text
-    minus         = { fg = p.his_1 },                 -- @diff.minus: deleted text
-    delta         = { fg = p.sky_2 },                 -- @diff.delta: changed text
+    plus          = { fg = p.tyr_1 },  -- @diff.plus: added text
+    minus         = { fg = p.his_1 },  -- @diff.minus: deleted text
+    delta         = { fg = p.sky_2 },  -- @diff.delta: changed text
 },
 
 tree = {
