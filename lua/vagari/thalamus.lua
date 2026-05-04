@@ -326,9 +326,10 @@ tree = {
 },
 
 misc = {
-    deprecated  = { sp = p.sun_1, fmt = "strikethrough" },
-    link        = { fg = p.tyr_3 },
-    specialchar = { fg = p.sky_0 },
+    alpha_header = { fg = p.orn_3, fmt = "bold" },
+    deprecated   = { sp = p.sun_1, fmt = "strikethrough" },
+    link         = { fg = p.tyr_3 },
+    specialchar  = { fg = p.sky_0 },
 },
 
 }

@@ -99,6 +99,7 @@ function highlights.setup()
 	hl("Question", t.idle.idle)
 
 	-- Misc UI
+	hl("AlphaHeader", t.misc.alpha_header)
 	hl("Directory", t.txt.title)
 	hl("Title", t.txt.title)
 	hl("Conceal", t.idle.idle)
