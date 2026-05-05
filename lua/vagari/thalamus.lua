@@ -321,7 +321,7 @@ markup = {
 tree = {
     file    = { fg = p.fg,    bg = p.glc_0 },
     exec    = { fg = p.orn_3 },
-    symlink = { fg = p.sky_2, fmt = "italic" },
+    symlink = { fg = p.glc_4, fmt = "italic" },
     dir     = { fg = p.blu_3, fmt = "bold" },
 },
 
