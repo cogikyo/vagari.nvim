@@ -264,10 +264,10 @@ keywords = {
     loop          = { fg = p.prp_1, fmt = "italic" },       -- @keyword.repeat: for, while, loop
     conditional   = { fg = p.prp_1, fmt = "italic" },       -- @keyword.conditional: if, else, match
 
-    import        = { fg = p.asn_2, fmt = "italic" },       -- @keyword.import: import, from, require
-    import_def    = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.import: define-style imports
-    directive     = { fg = p.asn_2, fmt = "italic" },       -- @keyword.directive: preprocessor, shebangs
-    directive_def = { fg = p.asn_2, fmt = "italic,bold" },  -- @keyword.directive.define: #define
+    import        = { fg = p.tyr_3, fmt = "italic" },       -- @keyword.import: import, from, require
+    import_def    = { fg = p.tyr_3, fmt = "italic,bold" },  -- @keyword.import: define-style imports
+    directive     = { fg = p.tyr_3, fmt = "italic" },       -- @keyword.directive: preprocessor, shebangs
+    directive_def = { fg = p.tyr_3, fmt = "italic,bold" },  -- @keyword.directive.define: #define
 },
 
 delimiters = {
