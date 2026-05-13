@@ -113,6 +113,15 @@ state = {
     add_ln      = { bg = blend(p.tyr_0, 0.20) },
     dirty_ln    = { bg = blend(p.glu_0, 0.25) },
     delete_ln   = { bg = blend(p.his_0, 0.25) },
+
+    staged_new_ln    = { bg = blend(p.pro_0, 0.08) },
+    staged_add_ln    = { bg = blend(p.tyr_0, 0.08) },
+    staged_dirty_ln  = { bg = blend(p.glu_0, 0.08) },
+    staged_delete_ln = { bg = blend(p.his_0, 0.08) },
+
+    add_word     = { fg = p.emr_4, fmt = "bold" },
+    dirty_word   = { fg = p.sky_4, fmt = "bold" },
+    delete_word  = { fg = p.rby_1, fmt = "bold" },
 },
 
 diff = {

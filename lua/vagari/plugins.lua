@@ -47,6 +47,14 @@ function plugins.setup()
 	hl("GitSignsDeleteLn", t.state.delete_ln)
 	hl("GitSignsDeleteNr", t.state.delete)
 	hl("GitSignsUntracked", t.state.new)
+	hl("GitSignsAddLnInline", t.state.add_word)
+	hl("GitSignsChangeLnInline", t.state.dirty_word)
+	hl("GitSignsDeleteLnInline", t.state.delete_word)
+	hl("GitSignsStagedAddLn", t.state.staged_add_ln)
+	hl("GitSignsStagedChangeLn", t.state.staged_dirty_ln)
+	hl("GitSignsStagedChangedeleteLn", t.state.staged_dirty_ln)
+	hl("GitSignsStagedTopdeleteLn", t.state.staged_delete_ln)
+	hl("GitSignsStagedUntrackedLn", t.state.staged_new_ln)
 
 	-- ========================================================================
 	-- NvimTree
