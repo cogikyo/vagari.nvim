@@ -43,8 +43,6 @@ function languages.setup()
 	hl("@tag.builtin.tsx", { fg = p.blu_0 })
 	hl("@tag.tsx", { fg = p.blu_1 })
 	hl("@tag.attribute.tsx", { fg = p.blu_3 })
-	hl("@function.method.call.tsx", { fg = p.orn_3 })
-	hl("@function.method.call.tsx", { fg = p.orn_3 })
   hl("@type.tsx", { fg = p.blu_2 })
 
 	-- Help

@@ -221,7 +221,7 @@ functions = {
 
     call          = { fg = p.orn_4 },                  -- @function.call
     method        = { fg = p.blu_3 },                  -- @function.method
-    method_call   = { fg = p.blu_2 },                  -- @function.method.call
+    method_call   = { fg = p.orn_3 },                  -- @function.method.call
     def           = { fg = p.blu_2, fmt = "bold" },    -- @function
     macro         = { fg = p.blu_2, fmt = "italic" },  -- @function.macro
     builtin       = { fg = p.blu_1, fmt = "italic" },  -- @function.builtin
