@@ -25,6 +25,9 @@ function languages.setup()
 	-- Lua
 	hl("@property.lua", { fg = p.blu_3 })
 
+  -- Go
+	hl("@module.go", { fg = p.tyr_3 })
+
 	-- Python
 	hl("@string.documentation.python", { fg = p.glc_5, fmt = "bold" })
 

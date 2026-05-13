@@ -234,7 +234,7 @@ types = {
     store         = { fg = p.glu_3, fmt = "italic" },  -- @storageclass: static, extern
 
     definition    = { fg = p.brt_3, fmt = "bold" },    -- @type.definition: type name in declaration
-    type          = { fg = p.brt_1, fmt = "italic" },  -- @type: general type references
+    type          = { fg = p.brt_1 },                  -- @type: general type references
     class         = { fg = p.brt_0, fmt = "italic" },  -- @type: class definitions
     struct        = { fg = p.brt_0, fmt = "italic" },  -- @type: struct definitions
     member        = { fg = p.brt_0 },                  -- @type: member types
