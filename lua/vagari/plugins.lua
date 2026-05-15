@@ -2,8 +2,9 @@
 -- Vagari Plugin Highlights
 -- ============================================================================
 
-local t = require("vagari.thalamus")
 local h = require("vagari.helpers")
+local p = require("vagari.palette")
+local t = require("vagari.thalamus")
 local hl = h.hl
 local link = h.link
 
@@ -91,6 +92,7 @@ function plugins.setup()
 
 	-- Files
 	hl("NvimTreeFileIcon", t.idle.idle)
+	hl("NvimTreeTestFile", { fg = p.glc_5 })
 	hl("NvimTreeExecFile", t.tree.exec)
 	hl("NvimTreeSpecialFile", t.tree.file)
 	hl("NvimTreeImageFile", t.tree.file)
