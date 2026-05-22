@@ -298,13 +298,13 @@ tags = {
 markup = {
     underline      = { fg = p.brt_0, sp = p.brt_2, fmt = "underline" },  -- @markup.underline
 
-    heading        = { fg = p.orn_4, bg = blend(p.orn_4, 0.10), fmt = "bold" },         -- @markup.heading
-    heading_1      = { fg = p.orn_4, bg = blend(p.orn_4, 0.10), fmt = "bold,italic" },  -- @markup.heading.1
-    heading_2      = { fg = p.orn_4, bg = blend(p.orn_4, 0.10) },                       -- @markup.heading.2
-    heading_3      = { fg = p.orn_3, bg = blend(p.orn_3, 0.10), fmt = "bold" },         -- @markup.heading.3
-    heading_4      = { fg = p.orn_3, bg = blend(p.orn_3, 0.10) },                       -- @markup.heading.4
-    heading_5      = { fg = p.orn_3, bg = blend(p.orn_3, 0.10), fmt = "italic" },       -- @markup.heading.5
-    heading_6      = { fg = p.orn_2, bg = blend(p.orn_2, 0.10) },                       -- @markup.heading.6
+    heading        = { fg = p.orn_4, fmt = "bold" },                     -- @markup.heading
+    heading_1      = { fg = p.orn_4, fmt = "bold,italic" },              -- @markup.heading.1
+    heading_2      = { fg = p.orn_4 },                                   -- @markup.heading.2
+    heading_3      = { fg = p.orn_3, fmt = "bold" },                     -- @markup.heading.3
+    heading_4      = { fg = p.orn_3 },                                   -- @markup.heading.4
+    heading_5      = { fg = p.orn_3,  fmt = "italic" },                  -- @markup.heading.5
+    heading_6      = { fg = p.orn_2 },                                   -- @markup.heading.6
     math           = { fg = p.sky_1 },                                   -- @markup.math: $math$
     link_label     = { fg = p.brt_3, fmt = "bold" },                     -- @markup.link.label
 
