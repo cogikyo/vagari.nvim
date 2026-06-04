@@ -217,7 +217,7 @@ identifiers = {
 },
 
 functions = {
-    constructor   = { fg = p.brt_0, fmt = "bold" },    -- @constructor
+    constructor   = { fg = p.orn_1, fmt = "bold" },    -- @constructor
 
     call          = { fg = p.orn_4 },                  -- @function.call
     method        = { fg = p.blu_3 },                  -- @function.method

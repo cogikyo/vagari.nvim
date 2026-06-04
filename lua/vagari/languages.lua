@@ -24,6 +24,7 @@ function languages.setup()
 
 	-- Lua
 	hl("@property.lua", { fg = p.blu_3 })
+	hl("@constructor.lua", { fg = p.brt_0, fmt = "bold" })
 
   -- Go
 	hl("@module.go", { fg = p.tyr_3 })
