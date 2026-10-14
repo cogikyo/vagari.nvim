@@ -20,7 +20,7 @@ function languages.setup()
 
 	-- TOML
 	link("@type.toml", "Tag")
-	link("@property.toml", "VariableParameter")
+	link("@property.toml", "@variable.parameter")
 
 	-- Lua
 	hl("@property.lua", { fg = p.blu_3 })
